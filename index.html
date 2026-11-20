@@ -3,15 +3,15 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Consultant Directory | Regional Hospitals & Clinical Specialist Roster</title>
+  <title>Consultant Directory</title>
 
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
 
   <!-- Google Fonts: Inter & Plus Jakarta Sans -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet" />
 
   <!-- Lucide Icons -->
   <script src="https://unpkg.com/lucide@latest"></script>
@@ -23,14 +23,14 @@
           fontFamily: {
             sans: ['Inter', 'sans-serif'],
             display: ['Plus Jakarta Sans', 'sans-serif'],
-          }
-        }
-      }
-    }
+          },
+        },
+      },
+    };
   </script>
 
   <style>
-    /* Bright, Eye-Catching Light Palette (No Dark Surfaces) */
+    /* Bright Light Palette (#f4fbf9 with soft teal, sky, and emerald gradients; zero dark surfaces) */
     body {
       background-color: #f4fbf9;
       color: #0f172a;
@@ -170,7 +170,7 @@
       left: 150%;
     }
 
-    /* Active Clinic Pill/Row in Sidebar */
+    /* Active Clinic Row in Sidebar */
     .clinic-btn-active {
       background: linear-gradient(90deg, rgba(13, 148, 136, 0.16) 0%, rgba(2, 132, 199, 0.10) 100%);
       border-color: rgba(13, 148, 136, 0.45);
@@ -203,6 +203,112 @@
       pointer-events: none;
     }
 
+    /* Most Viewed Daily Spotlight & Badge Styling */
+    .most-viewed-spotlight {
+      background: linear-gradient(120deg, rgba(255, 255, 255, 0.96) 0%, rgba(240, 253, 250, 0.94) 55%, rgba(240, 249, 255, 0.94) 100%);
+      border: 1px solid rgba(13, 148, 136, 0.22);
+      box-shadow: 0 10px 26px -12px rgba(13, 148, 136, 0.18);
+    }
+
+    .most-viewed-front-card {
+      border-color: rgba(13, 148, 136, 0.38);
+      box-shadow: 0 12px 28px -10px rgba(13, 148, 136, 0.2), 0 4px 12px -4px rgba(2, 132, 199, 0.12);
+    }
+
+    /* Tiny CSS-Only Glitch Effect for Top Attribution Strip */
+    .tiny-glitch-strip {
+      background: linear-gradient(90deg, #f0fdfa 0%, #f0f9ff 50%, #f0fdf4 100%);
+      border-bottom: 1px solid rgba(13, 148, 136, 0.16);
+    }
+
+    .tiny-glitch-text {
+      position: relative;
+      display: inline-block;
+      font-size: 10px;
+      line-height: 1.2;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      color: #0f766e;
+      animation: tinyGlitchJitter 4.5s infinite;
+    }
+
+    .tiny-glitch-text::before,
+    .tiny-glitch-text::after {
+      content: attr(data-text);
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      background: transparent;
+    }
+
+    .tiny-glitch-text::before {
+      color: #0284c7;
+      z-index: -1;
+      animation: tinyGlitchSliceA 2.7s infinite linear alternate-reverse;
+    }
+
+    .tiny-glitch-text::after {
+      color: #059669;
+      z-index: -1;
+      animation: tinyGlitchSliceB 3.1s infinite linear alternate-reverse;
+    }
+
+    @keyframes tinyGlitchSliceA {
+      0%, 85%, 100% {
+        transform: translate(0, 0);
+        opacity: 0;
+      }
+      87% {
+        transform: translate(-1.5px, -0.5px);
+        opacity: 0.8;
+      }
+      89% {
+        transform: translate(1.5px, 0.5px);
+        opacity: 0.65;
+      }
+      91% {
+        transform: translate(0, 0);
+        opacity: 0;
+      }
+    }
+
+    @keyframes tinyGlitchSliceB {
+      0%, 80%, 100% {
+        transform: translate(0, 0);
+        opacity: 0;
+      }
+      82% {
+        transform: translate(1.5px, -0.5px);
+        opacity: 0.75;
+      }
+      85% {
+        transform: translate(-1.5px, 0.5px);
+        opacity: 0.6;
+      }
+      88% {
+        transform: translate(0, 0);
+        opacity: 0;
+      }
+    }
+
+    @keyframes tinyGlitchJitter {
+      0%, 92%, 100% {
+        transform: translateX(0);
+      }
+      93% {
+        transform: translateX(-1px);
+      }
+      95% {
+        transform: translateX(1px);
+      }
+      97% {
+        transform: translateX(0);
+      }
+    }
+
     .no-scrollbar::-webkit-scrollbar {
       display: none;
     }
@@ -214,15 +320,30 @@
 </head>
 <body class="min-h-screen flex flex-col antialiased selection:bg-teal-200 selection:text-teal-950">
 
+  <!-- Top Attribution Strip with Tiny Text & CSS-Only Glitch Effect -->
+  <div class="tiny-glitch-strip relative z-40 w-full py-1 px-4 text-center select-none" aria-label="Developer attribution">
+    <span class="tiny-glitch-text text-[10px]" data-text="Dev by DaNuka (D2F Systams)">
+      Dev by DaNuka (D2F Systams)
+    </span>
+  </div>
+
   <!-- Animated Light-Mode Hospital Background Layer -->
   <div class="fixed inset-0 pointer-events-none overflow-hidden z-0" aria-hidden="true">
     <!-- Subtle Pastel Grid -->
-    <div class="absolute inset-0 opacity-[0.35]" style="background-image: linear-gradient(to right, rgba(20, 184, 166, 0.08) 1px, transparent 1px), linear-gradient(to bottom, rgba(2, 132, 199, 0.08) 1px, transparent 1px); background-size: 48px 48px;"></div>
+    <div
+      class="absolute inset-0 opacity-[0.35]"
+      style="background-image: linear-gradient(to right, rgba(20, 184, 166, 0.08) 1px, transparent 1px), linear-gradient(to bottom, rgba(2, 132, 199, 0.08) 1px, transparent 1px); background-size: 48px 48px;"
+    ></div>
 
     <!-- ECG Heartbeat Pulse Line -->
     <svg class="absolute top-24 left-0 w-full h-28 opacity-40" viewBox="0 0 1200 120" preserveAspectRatio="none">
-      <path class="ecg-line-anim" fill="none" stroke="url(#ecgLightGrad)" stroke-width="2.2"
-        d="M0,60 L240,60 L260,60 L275,26 L292,96 L310,14 L328,84 L342,60 L580,60 L600,60 L615,28 L632,94 L650,16 L668,82 L682,60 L920,60 L940,60 L955,24 L972,95 L990,15 L1008,84 L1022,60 L1200,60" />
+      <path
+        class="ecg-line-anim"
+        fill="none"
+        stroke="url(#ecgLightGrad)"
+        stroke-width="2.2"
+        d="M0,60 L240,60 L260,60 L275,26 L292,96 L310,14 L328,84 L342,60 L580,60 L600,60 L615,28 L632,94 L650,16 L668,82 L682,60 L920,60 L940,60 L955,24 L972,95 L990,15 L1008,84 L1022,60 L1200,60"
+      />
       <defs>
         <linearGradient id="ecgLightGrad" x1="0%" y1="0%" x2="100%" y2="0%">
           <stop offset="0%" stop-color="#0d9488" stop-opacity="0" />
@@ -234,52 +355,52 @@
 
     <!-- Floating Stethoscope SVG (Top Right) -->
     <svg class="bg-float-1 absolute top-20 right-[6%] w-44 h-44 text-teal-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M4.8 2.3A.3.3 0 1 0 5 2H4a2 2 0 0 0-2 2v5a6 6 0 0 0 6 6v0a6 6 0 0 0 6-6V4a2 2 0 0 0-2-2h-1a.2.2 0 1 0 .3.3"/>
-      <path d="M8 15v1a6 6 0 0 0 6 6v0a6 6 0 0 0 6-6v-4"/>
-      <circle cx="20" cy="10" r="2"/>
+      <path d="M4.8 2.3A.3.3 0 1 0 5 2H4a2 2 0 0 0-2 2v5a6 6 0 0 0 6 6v0a6 6 0 0 0 6-6V4a2 2 0 0 0-2-2h-1a.2.2 0 1 0 .3.3" />
+      <path d="M8 15v1a6 6 0 0 0 6 6v0a6 6 0 0 0 6-6v-4" />
+      <circle cx="20" cy="10" r="2" />
     </svg>
 
     <!-- Floating Medical Shield Cross SVG (Bottom Left) -->
     <svg class="bg-float-2 absolute bottom-16 left-[4%] w-52 h-52 text-sky-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-      <path d="M12 8v8"/>
-      <path d="M8 12h8"/>
+      <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+      <path d="M12 8v8" />
+      <path d="M8 12h8" />
     </svg>
 
     <!-- Floating DNA Helix SVG (Middle Right) -->
     <svg class="bg-float-3 absolute top-[48%] right-[3%] w-40 h-40 text-emerald-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M2 15c6.667-6 13.333 0 20-6"/>
-      <path d="M9 22c1.798-1.998 2.518-3.995 2.807-5.993"/>
-      <path d="M15 2c-1.798 1.998-2.518 3.995-2.807 5.993"/>
-      <path d="m17 6-2.5-2.5"/>
-      <path d="m14 8-1-1"/>
-      <path d="m7 18 2.5 2.5"/>
-      <path d="m3.5 14.5.5.5"/>
-      <path d="m20 9 .5.5"/>
-      <path d="m6.5 12.5 1 1"/>
-      <path d="m16.5 10.5 1 1"/>
-      <path d="m10 16 1.5 1.5"/>
+      <path d="M2 15c6.667-6 13.333 0 20-6" />
+      <path d="M9 22c1.798-1.998 2.518-3.995 2.807-5.993" />
+      <path d="M15 2c-1.798 1.998-2.518 3.995-2.807 5.993" />
+      <path d="m17 6-2.5-2.5" />
+      <path d="m14 8-1-1" />
+      <path d="m7 18 2.5 2.5" />
+      <path d="m3.5 14.5.5.5" />
+      <path d="m20 9 .5.5" />
+      <path d="m6.5 12.5 1 1" />
+      <path d="m16.5 10.5 1 1" />
+      <path d="m10 16 1.5 1.5" />
     </svg>
 
     <!-- Floating Capsule SVG (Top Left-Center) -->
     <svg class="bg-float-2 absolute top-36 left-[26%] w-28 h-28 text-cyan-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round">
-      <path d="m10.5 20.5 10-10a4.95 4.95 0 1 0-7-7l-10 10a4.95 4.95 0 1 0 7 7Z"/>
-      <path d="m8.5 8.5 7 7"/>
+      <path d="m10.5 20.5 10-10a4.95 4.95 0 1 0-7-7l-10 10a4.95 4.95 0 1 0 7 7Z" />
+      <path d="m8.5 8.5 7 7" />
     </svg>
 
     <!-- Floating Heartbeat Pulse SVG (Bottom Right) -->
     <svg class="bg-float-1 absolute bottom-20 right-[18%] w-36 h-36 text-teal-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/>
-      <path d="M3.22 12H9.5l.5-1 2 4.5 2-7 1.5 3.5h5.27"/>
+      <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z" />
+      <path d="M3.22 12H9.5l.5-1 2 4.5 2-7 1.5 3.5h5.27" />
     </svg>
   </div>
 
-  <!-- Top Header & Main Search Bar -->
-  <header class="sticky top-0 z-30 border-b border-teal-900/10 bg-white/85 backdrop-blur-xl shadow-sm">
+  <!-- Sticky Top Header & Main Search Controls -->
+  <header class="sticky top-0 z-30 border-b border-teal-900/10 bg-white/90 backdrop-blur-xl shadow-sm">
     <div class="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 py-4">
-      <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
+      <div class="flex flex-col xl:flex-row xl:items-center xl:justify-between gap-4">
 
-        <!-- Brand & Title -->
+        <!-- Brand & Mobile Clinics Toggle -->
         <div class="flex items-center justify-between">
           <div class="flex items-center gap-3.5">
             <div class="relative flex items-center justify-center w-11 h-11 rounded-xl bg-gradient-to-br from-teal-500 to-cyan-600 text-white shadow-md shadow-teal-600/20">
@@ -289,57 +410,70 @@
                 <span class="relative inline-flex rounded-full h-3 w-3 bg-emerald-500 ring-2 ring-white"></span>
               </span>
             </div>
-            <div>
-              <h1 class="font-display text-xl sm:text-2xl font-extrabold tracking-tight text-slate-900 flex items-center gap-2">
-                Consultant Directory
-                <span class="hidden sm:inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-teal-50 text-teal-700 border border-teal-200">
-                  Clinical Roster
-                </span>
-              </h1>
-              <p class="text-xs sm:text-sm text-slate-600">
-                Regional Hospitals &amp; Clinical Specialist Roster
-              </p>
-            </div>
+            <h1 class="font-display text-xl sm:text-2xl font-extrabold tracking-tight text-slate-900">
+              Consultant Directory
+            </h1>
           </div>
 
-          <!-- Mobile Clinic Drawer Toggle -->
-          <button id="mobileClinicToggle" type="button" class="lg:hidden inline-flex items-center gap-2 px-3 py-2 rounded-xl bg-teal-50 border border-teal-200 text-teal-900 text-xs font-semibold hover:bg-teal-100 transition">
+          <!-- Mobile Clinic Sidebar Toggle -->
+          <button
+            id="mobileClinicToggle"
+            type="button"
+            class="lg:hidden inline-flex items-center gap-2 px-3.5 py-2.5 rounded-xl bg-teal-50 border border-teal-200 text-teal-900 text-xs font-semibold hover:bg-teal-100 transition"
+          >
             <i data-lucide="layout-list" class="w-4 h-4 text-teal-600"></i>
             <span>Clinics</span>
           </button>
         </div>
 
-        <!-- Main Search Input & Live Sync Pill -->
-        <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 flex-1 lg:max-w-2xl">
-          <div class="relative flex-1 group">
-            <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none">
-              <i data-lucide="search" class="w-4 h-4 text-slate-400 group-focus-within:text-teal-600 transition-colors"></i>
+        <!-- Large Search Bar + Prominent Search Button + Live Sync Controls -->
+        <div class="flex flex-col md:flex-row items-stretch md:items-center gap-3 flex-1 xl:max-w-4xl">
+          <form id="searchForm" class="flex items-stretch gap-2 flex-1" role="search">
+            <div class="relative flex-1 group">
+              <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                <i data-lucide="search" class="w-5 h-5 text-slate-400 group-focus-within:text-teal-600 transition-colors"></i>
+              </div>
+              <input
+                id="mainSearchInput"
+                type="text"
+                autocomplete="off"
+                placeholder="Search doctor name, clinic, specialty, or hospital..."
+                class="w-full pl-11 pr-20 py-3.5 rounded-2xl bg-white border-2 border-slate-200 text-sm sm:text-base font-medium text-slate-900 placeholder-slate-400 focus:outline-none focus:border-teal-500 focus:ring-4 focus:ring-teal-500/15 transition-all shadow-xs"
+              />
+              <div class="absolute inset-y-0 right-0 pr-3 flex items-center gap-1.5">
+                <button
+                  id="clearSearchBtn"
+                  type="button"
+                  title="Clear search"
+                  class="hidden p-1.5 rounded-lg text-slate-400 hover:text-slate-700 hover:bg-slate-100 transition"
+                >
+                  <i data-lucide="x" class="w-4 h-4"></i>
+                </button>
+                <kbd
+                  title="Press / to focus search"
+                  class="hidden sm:inline-flex items-center px-2 py-0.5 text-[11px] font-bold text-slate-500 bg-slate-100 border border-slate-200 rounded-md"
+                >
+                  /
+                </kbd>
+              </div>
             </div>
-            <input
-              id="mainSearchInput"
-              type="text"
-              autocomplete="off"
-              placeholder="Search doctor name, clinic, specialty, or hospital..."
-              class="w-full pl-10 pr-20 py-2.5 rounded-xl bg-white border border-slate-200 text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:border-teal-500 focus:ring-4 focus:ring-teal-500/15 transition-all shadow-xs"
-            />
-            <div class="absolute inset-y-0 right-0 pr-2.5 flex items-center gap-1.5">
-              <button
-                id="clearSearchBtn"
-                type="button"
-                title="Clear search"
-                class="hidden p-1 rounded-lg text-slate-400 hover:text-slate-700 hover:bg-slate-100 transition"
-              >
-                <i data-lucide="x" class="w-3.5 h-3.5"></i>
-              </button>
-              <kbd class="hidden sm:inline-flex items-center px-1.5 py-0.5 text-[10px] font-semibold text-slate-500 bg-slate-100 border border-slate-200 rounded">
-                /
-              </kbd>
-            </div>
-          </div>
 
-          <!-- Live Sync Status Badge + Manual Refresh Button -->
-          <div class="flex items-center justify-between sm:justify-end gap-2">
-            <div id="syncStatusBadge" class="inline-flex items-center gap-2 px-3 py-2 rounded-xl bg-white border border-slate-200 text-xs font-medium text-slate-700 whitespace-nowrap shadow-xs">
+            <button
+              id="searchSubmitBtn"
+              type="submit"
+              class="shrink-0 inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-2xl bg-gradient-to-r from-teal-600 to-cyan-600 hover:from-teal-700 hover:to-cyan-700 active:scale-[0.99] text-white text-sm sm:text-base font-bold shadow-md shadow-teal-600/25 transition-all cursor-pointer"
+            >
+              <i data-lucide="search" class="w-4 h-4 sm:w-5 sm:h-5"></i>
+              <span>Search</span>
+            </button>
+          </form>
+
+          <!-- Live Sync Status Pill & Manual Refresh Button -->
+          <div class="flex items-center justify-between md:justify-end gap-2 shrink-0">
+            <div
+              id="syncStatusBadge"
+              class="inline-flex items-center gap-2 px-3.5 py-2.5 rounded-xl bg-white border border-slate-200 text-xs font-semibold text-slate-700 whitespace-nowrap shadow-xs"
+            >
               <span id="syncStatusDot" class="w-2 h-2 rounded-full bg-teal-500 animate-pulse"></span>
               <span id="syncStatusText">Preloaded &amp; Syncing...</span>
             </div>
@@ -347,7 +481,7 @@
               id="refreshSheetBtn"
               type="button"
               title="Sync latest data from Google Sheet"
-              class="p-2.5 rounded-xl bg-white border border-slate-200 text-slate-700 hover:text-teal-700 hover:border-teal-300 hover:bg-teal-50/50 active:scale-95 transition shadow-xs"
+              class="p-3 rounded-xl bg-white border border-slate-200 text-slate-700 hover:text-teal-700 hover:border-teal-300 hover:bg-teal-50/60 active:scale-95 transition shadow-xs cursor-pointer"
             >
               <i id="refreshIcon" data-lucide="refresh-cw" class="w-4 h-4"></i>
             </button>
@@ -355,13 +489,13 @@
         </div>
       </div>
 
-      <!-- Hospital Filter Pills Bar -->
+      <!-- Horizontal Row of Clickable Hospital Name Buttons with Live Counts -->
       <div class="mt-3.5 pt-3 border-t border-slate-200/80 flex items-center gap-2 overflow-x-auto pb-1 no-scrollbar" id="hospitalFilterBar">
         <span class="text-[11px] font-bold uppercase tracking-wider text-slate-500 mr-1 flex items-center gap-1 shrink-0">
           <i data-lucide="building-2" class="w-3.5 h-3.5 text-teal-600"></i>
-          Hospital:
+          Hospitals:
         </span>
-        <!-- Filter pills populated dynamically -->
+        <!-- Hospital buttons populated dynamically -->
       </div>
     </div>
   </header>
@@ -369,9 +503,9 @@
   <!-- Main Workspace Layout -->
   <div class="relative z-10 flex-1 max-w-[1600px] w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 flex flex-col lg:flex-row gap-6">
 
-    <!-- Left Sidebar: Clinic Down List -->
+    <!-- Left Sidebar: Scrollable Clinics & Departments List with Live Counts -->
     <aside id="clinicSidebar" class="hidden lg:flex flex-col w-full lg:w-80 xl:w-88 shrink-0">
-      <div class="sticky top-36 rounded-2xl bg-white/90 backdrop-blur-xl border border-teal-900/12 shadow-lg shadow-teal-900/5 overflow-hidden flex flex-col max-h-[calc(100vh-10.5rem)]">
+      <div class="sticky top-44 rounded-2xl bg-white/90 backdrop-blur-xl border border-teal-900/12 shadow-lg shadow-teal-900/5 overflow-hidden flex flex-col max-h-[calc(100vh-12rem)]">
         <!-- Sidebar Header -->
         <div class="px-4 py-3.5 border-b border-slate-200/80 bg-gradient-to-r from-teal-50/90 to-sky-50/80 flex items-center justify-between">
           <div class="flex items-center gap-2">
@@ -385,7 +519,7 @@
           </span>
         </div>
 
-        <!-- Quick Clinic Filter inside Sidebar -->
+        <!-- Quick Clinic Filter Input -->
         <div class="p-2.5 border-b border-slate-200/70 bg-slate-50/70">
           <div class="relative">
             <i data-lucide="filter" class="w-3.5 h-3.5 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2"></i>
@@ -398,7 +532,7 @@
           </div>
         </div>
 
-        <!-- Scrollable Vertical Clinic Down List -->
+        <!-- Scrollable Clinic List -->
         <nav id="clinicListContainer" aria-label="Clinics and Departments" class="flex-1 overflow-y-auto p-2.5 space-y-1.5">
           <!-- Clinic items injected via JS -->
         </nav>
@@ -408,9 +542,46 @@
     <!-- Main Stage: Consultant Cards Grid -->
     <main class="flex-1 min-w-0 flex flex-col gap-5">
 
-      <!-- Active Filter Banner & Reset Controls -->
+      <!-- Prominent "Most Viewed Today" Daily Spotlight Section -->
+      <section id="mostViewedTodaySection" aria-label="Most Viewed Today" class="most-viewed-spotlight rounded-2xl p-4 sm:p-5">
+        <div class="flex flex-wrap items-center justify-between gap-3 mb-3.5">
+          <div class="flex items-center gap-2.5">
+            <span class="inline-flex items-center justify-center w-8 h-8 rounded-xl bg-gradient-to-br from-teal-500 to-cyan-600 text-white shadow-sm shadow-teal-600/20">
+              <i data-lucide="flame" class="w-4 h-4"></i>
+            </span>
+            <div>
+              <div class="flex items-center gap-2 flex-wrap">
+                <h2 class="font-display text-sm sm:text-base font-extrabold text-slate-900">
+                  Most Viewed Today
+                </h2>
+                <span id="dailySpotlightDateLabel" class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-teal-100 text-teal-800 border border-teal-200">
+                  Daily Top Picks
+                </span>
+              </div>
+              <p class="text-[11px] sm:text-xs text-slate-600">
+                Automatically tracked per day from searches, card views, and clinic clicks
+              </p>
+            </div>
+          </div>
+
+          <button
+            id="spotlightSortBtn"
+            type="button"
+            class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold bg-white text-teal-800 border border-teal-200 hover:bg-teal-50 hover:border-teal-400 transition shadow-xs cursor-pointer"
+          >
+            <i data-lucide="arrow-up-down" class="w-3.5 h-3.5 text-teal-600"></i>
+            <span>Sort: Most Viewed Daily</span>
+          </button>
+        </div>
+
+        <div id="mostViewedTodayList" class="grid grid-cols-1 md:grid-cols-3 gap-3">
+          <!-- Top daily viewed consultants rendered dynamically -->
+        </div>
+      </section>
+
+      <!-- Active Filter Banner, Front-Screen Limit Toggle, Sort Toggle & Reset Control -->
       <div class="flex flex-wrap items-center justify-between gap-3 px-1">
-        <div class="flex items-center gap-2.5">
+        <div class="flex items-center gap-2.5 flex-wrap">
           <h2 id="stageHeading" class="font-display text-lg sm:text-xl font-bold text-slate-900">
             All Clinical Specialists
           </h2>
@@ -419,14 +590,38 @@
           </span>
         </div>
 
-        <button
-          id="resetAllFiltersBtn"
-          type="button"
-          class="hidden inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold bg-white text-slate-700 border border-slate-200 hover:border-teal-400 hover:text-teal-700 transition shadow-xs"
-        >
-          <i data-lucide="rotate-ccw" class="w-3.5 h-3.5"></i>
-          Reset Filters
-        </button>
+        <div class="flex items-center gap-2 flex-wrap">
+          <!-- Front-Screen Card Limit Toggle ('Show All (62)' / 'Show Few (6)') -->
+          <button
+            id="frontLimitToggleBtn"
+            type="button"
+            aria-pressed="false"
+            class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl text-xs font-bold bg-teal-50 text-teal-900 border border-teal-200 hover:bg-teal-100 hover:border-teal-400 transition shadow-xs cursor-pointer"
+          >
+            <i data-lucide="layers" class="w-3.5 h-3.5 text-teal-600"></i>
+            <span id="frontLimitToggleLabel">Show All (62)</span>
+          </button>
+
+          <!-- Optional "Sort: Most Viewed Daily" Toggle -->
+          <button
+            id="sortMostViewedDailyBtn"
+            type="button"
+            aria-pressed="false"
+            class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl text-xs font-bold bg-white text-slate-700 border border-slate-200 hover:border-teal-400 hover:text-teal-700 transition shadow-xs cursor-pointer"
+          >
+            <i data-lucide="trending-up" class="w-3.5 h-3.5 text-teal-600"></i>
+            <span id="sortMostViewedDailyLabel">Sort: Most Viewed Daily</span>
+          </button>
+
+          <button
+            id="resetAllFiltersBtn"
+            type="button"
+            class="hidden inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold bg-white text-slate-700 border border-slate-200 hover:border-teal-400 hover:text-teal-700 transition shadow-xs cursor-pointer"
+          >
+            <i data-lucide="rotate-ccw" class="w-3.5 h-3.5"></i>
+            Reset Filters
+          </button>
+        </div>
       </div>
 
       <!-- Consultant Cards Grid -->
@@ -435,18 +630,21 @@
       </section>
 
       <!-- Empty State Message -->
-      <div id="emptyStateContainer" class="hidden rounded-2xl bg-white/90 border border-slate-200 p-12 text-center flex-col items-center justify-center shadow-xs">
+      <div
+        id="emptyStateContainer"
+        class="hidden rounded-2xl bg-white/90 border border-slate-200 p-12 text-center flex-col items-center justify-center shadow-xs"
+      >
         <div class="w-14 h-14 rounded-2xl bg-teal-50 border border-teal-200 flex items-center justify-center mb-4">
           <i data-lucide="search-x" class="w-7 h-7 text-teal-600"></i>
         </div>
         <h3 class="font-display text-lg font-bold text-slate-900 mb-1">No matching consultants found</h3>
         <p class="text-sm text-slate-600 max-w-md mb-5">
-          Try adjusting your search query, selecting a different hospital filter, or returning to all clinics.
+          Try adjusting your search query, selecting a different hospital button, or returning to all clinics.
         </p>
         <button
           id="emptyResetBtn"
           type="button"
-          class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-teal-600 text-white text-sm font-semibold hover:bg-teal-700 transition shadow-sm"
+          class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-teal-600 text-white text-sm font-semibold hover:bg-teal-700 transition shadow-sm cursor-pointer"
         >
           <i data-lucide="refresh-ccw" class="w-4 h-4"></i>
           Show All Consultants
@@ -460,7 +658,7 @@
     <div class="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 py-4 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-slate-600">
       <div class="flex items-center gap-2">
         <i data-lucide="shield-check" class="w-4 h-4 text-teal-600"></i>
-        <span>Regional Hospitals Consultant Roster &bull; Live Google Visualization Sync</span>
+        <span>Consultant Directory &bull; Live Google Visualization Sync</span>
       </div>
       <div class="flex items-center gap-4">
         <span id="lastSyncedTime" class="text-slate-500">Source: Preloaded Roster</span>
@@ -488,7 +686,9 @@
   <script>
     const SHEET_ID = '1QddUsl1_hKiMFrtRw3wvDm5fcAFRyT3jiOPpDisGBWs';
     const GVIZ_CSV_URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:csv&gid=0`;
+    const FRONT_SCREEN_CARD_LIMIT = 6;
 
+    // Preloaded 62-consultant regional hospital roster fallback
     const PRELOADED_CONSULTANTS = [
       { clinic: "Surgical Clinic", hospital: "Base Hospital Panadura", name: "Dr. Hasitha Udayakumara (A)", specialty: "Consultant General Surgeon" },
       { clinic: "Surgical Clinic", hospital: "Base Hospital Panadura", name: "Dr. Ajith Ranasinghe (B)", specialty: "Surgeon" },
@@ -559,9 +759,14 @@
       selectedClinic: 'ALL',
       selectedHospital: 'ALL',
       searchQuery: '',
-      clinicSidebarFilter: ''
+      clinicSidebarFilter: '',
+      showAllOnFrontScreen: false,
+      sortByMostViewedDaily: false,
+      dailyViews: {},
+      dailyDateKey: '',
     };
 
+    // Light-palette hospital accent styles (zero dark surfaces)
     function getHospitalStyle(hospitalName) {
       const normalized = (hospitalName || '').toLowerCase();
       if (normalized.includes('panadura')) {
@@ -570,7 +775,11 @@
           badgeText: 'text-teal-800',
           badgeBorder: 'border-teal-200',
           dot: 'bg-teal-500',
-          avatarGrad: 'from-teal-100 to-emerald-50 text-teal-800 border-teal-200'
+          avatarGrad: 'from-teal-50 via-white to-emerald-50 border-teal-200',
+          coatFill: '#ffffff',
+          coatStroke: '#0f766e',
+          accentHex: '#0d9488',
+          hairHex: '#1e3a5f',
         };
       }
       if (normalized.includes('kalutara')) {
@@ -579,7 +788,11 @@
           badgeText: 'text-sky-800',
           badgeBorder: 'border-sky-200',
           dot: 'bg-sky-500',
-          avatarGrad: 'from-sky-100 to-cyan-50 text-sky-800 border-sky-200'
+          avatarGrad: 'from-sky-50 via-white to-cyan-50 border-sky-200',
+          coatFill: '#ffffff',
+          coatStroke: '#0369a1',
+          accentHex: '#0284c7',
+          hairHex: '#273043',
         };
       }
       if (normalized.includes('colombo south')) {
@@ -588,7 +801,11 @@
           badgeText: 'text-indigo-800',
           badgeBorder: 'border-indigo-200',
           dot: 'bg-indigo-500',
-          avatarGrad: 'from-indigo-100 to-blue-50 text-indigo-800 border-indigo-200'
+          avatarGrad: 'from-indigo-50 via-white to-blue-50 border-indigo-200',
+          coatFill: '#ffffff',
+          coatStroke: '#4338ca',
+          accentHex: '#4f46e5',
+          hairHex: '#2b2d42',
         };
       }
       if (normalized.includes('national hospital')) {
@@ -597,7 +814,11 @@
           badgeText: 'text-amber-800',
           badgeBorder: 'border-amber-200',
           dot: 'bg-amber-500',
-          avatarGrad: 'from-amber-100 to-orange-50 text-amber-800 border-amber-200'
+          avatarGrad: 'from-amber-50 via-white to-orange-50 border-amber-200',
+          coatFill: '#ffffff',
+          coatStroke: '#b45309',
+          accentHex: '#d97706',
+          hairHex: '#332927',
         };
       }
       if (normalized.includes('kethumathi')) {
@@ -606,7 +827,11 @@
           badgeText: 'text-rose-800',
           badgeBorder: 'border-rose-200',
           dot: 'bg-rose-500',
-          avatarGrad: 'from-rose-100 to-pink-50 text-rose-800 border-rose-200'
+          avatarGrad: 'from-rose-50 via-white to-pink-50 border-rose-200',
+          coatFill: '#ffffff',
+          coatStroke: '#be123c',
+          accentHex: '#e11d48',
+          hairHex: '#2d232e',
         };
       }
       return {
@@ -614,22 +839,61 @@
         badgeText: 'text-cyan-800',
         badgeBorder: 'border-cyan-200',
         dot: 'bg-cyan-500',
-        avatarGrad: 'from-cyan-100 to-teal-50 text-cyan-800 border-cyan-200'
+        avatarGrad: 'from-cyan-50 via-white to-teal-50 border-cyan-200',
+        coatFill: '#ffffff',
+        coatStroke: '#0e7490',
+        accentHex: '#0891b2',
+        hairHex: '#1f2937',
       };
     }
 
-    function getDoctorInitials(name) {
-      if (!name) return 'DR';
-      const cleaned = name
-        .replace(/\(.*?\)/g, '')
-        .replace(/\b(Dr\.?|Prof\.?|Mrs\.?|Mr\.?|Ms\.?|MO)\b/gi, '')
-        .trim();
-      const parts = cleaned.split(/\s+/).filter(Boolean);
-      if (parts.length === 0) return 'DR';
-      if (parts.length === 1) return parts[0].substring(0, 2).toUpperCase();
-      return (parts[0][0] + parts[parts.length - 1][0]).toUpperCase();
+    // Deterministic subtle tone variation for doctor clip-art portraits
+    function getDoctorClipArtSvg(name, hospitalName, seedIndex = 0) {
+      const style = getHospitalStyle(hospitalName);
+      const safeName = String(name || '');
+      let hash = seedIndex * 17;
+      for (let i = 0; i < safeName.length; i++) {
+        hash = (hash * 31 + safeName.charCodeAt(i)) % 997;
+      }
+
+      const skinTones = ['#fde2cf', '#f7cba8', '#eab68c', '#d89f72'];
+      const skinHex = skinTones[hash % skinTones.length];
+      const isFemaleStyle = /\b(Mrs\.?|Ms\.?|Woman)\b/i.test(safeName) ||
+        /(surangi|kamani|sajeewani|vithiya|hiranthi|lakmini|usha|gunendrika|monika|malkanthi|menaka|himali|nilushka|sivatharshya|apsara|manel|nilmini|champika|amitha)/i.test(safeName);
+
+      return `
+        <svg viewBox="0 0 64 64" class="w-full h-full block" role="img" aria-label="${escapeHtml(safeName)} doctor clip art">
+          <defs>
+            <linearGradient id="drBg_${hash}" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#ffffff" />
+              <stop offset="100%" stop-color="${style.accentHex}" stop-opacity="0.16" />
+            </linearGradient>
+          </defs>
+          <circle cx="32" cy="32" r="32" fill="url(#drBg_${hash})" />
+          ${
+            isFemaleStyle
+              ? `<path d="M17 31c0-9 6.5-15.5 15-15.5S47 22 47 31v10c0 2-1.5 3.5-3.5 3.5h-23C18.5 44.5 17 43 17 41V31z" fill="${style.hairHex}" />`
+              : `<path d="M20 26c0-7.5 5.4-12.5 12-12.5s12 5 12 12.5v2.5H20V26z" fill="${style.hairHex}" />`
+          }
+          <!-- White Medical Coat & Collar -->
+          <path d="M14 58c1.5-9.5 7.5-14.5 18-14.5s16.5 5 18 14.5H14z" fill="${style.coatFill}" stroke="${style.coatStroke}" stroke-width="2" stroke-linejoin="round" />
+          <path d="M26 43.5l6 7.5 6-7.5" fill="none" stroke="${style.coatStroke}" stroke-width="1.8" stroke-linejoin="round" />
+          <!-- Neck -->
+          <rect x="28" y="36" width="8" height="8" rx="3.5" fill="${skinHex}" />
+          <!-- Head -->
+          <circle cx="32" cy="27.5" r="10.2" fill="${skinHex}" stroke="${style.coatStroke}" stroke-width="1.4" />
+          <!-- Eyes & Gentle Smile -->
+          <circle cx="28.3" cy="27" r="1.35" fill="#0f172a" />
+          <circle cx="35.7" cy="27" r="1.35" fill="#0f172a" />
+          <path d="M29.3 31.8c1.5 1.4 3.9 1.4 5.4 0" fill="none" stroke="#0f172a" stroke-width="1.5" stroke-linecap="round" />
+          <!-- Stethoscope Around Neck & Chest -->
+          <path d="M23 44.5c0 5.8 3.6 9.5 9 9.5s9-3.7 9-9.5" fill="none" stroke="${style.accentHex}" stroke-width="2.2" stroke-linecap="round" />
+          <circle cx="32" cy="54" r="2.7" fill="${style.accentHex}" stroke="#ffffff" stroke-width="1.2" />
+        </svg>
+      `;
     }
 
+    // Parse CSV from Google Sheets GViz endpoint
     function parseCSV(text) {
       const rows = [];
       let currentRow = [];
@@ -673,9 +937,9 @@
       const refreshIcon = document.getElementById('refreshIcon');
       const lastSyncedEl = document.getElementById('lastSyncedTime');
 
-      syncDot.className = 'w-2 h-2 rounded-full bg-amber-500 animate-ping';
-      syncText.textContent = 'Syncing Sheet...';
-      refreshIcon.classList.add('animate-spin');
+      if (syncDot) syncDot.className = 'w-2 h-2 rounded-full bg-amber-500 animate-ping';
+      if (syncText) syncText.textContent = 'Syncing Sheet...';
+      if (refreshIcon) refreshIcon.classList.add('animate-spin');
 
       try {
         const response = await fetch(GVIZ_CSV_URL, { cache: 'no-store' });
@@ -710,7 +974,7 @@
                 clinic,
                 hospital: hospital || 'Regional Hospital',
                 name,
-                specialty: specialty || 'Specialist Consultant'
+                specialty: specialty || 'Specialist Consultant',
               });
             }
           }
@@ -719,9 +983,9 @@
             state.consultants = liveData;
             renderAll();
             const nowStr = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-            syncDot.className = 'w-2 h-2 rounded-full bg-emerald-500';
-            syncText.textContent = 'Live Synced with Google Sheet';
-            lastSyncedEl.textContent = `Last synced at ${nowStr} (${liveData.length} records)`;
+            if (syncDot) syncDot.className = 'w-2 h-2 rounded-full bg-emerald-500';
+            if (syncText) syncText.textContent = 'Live Synced with Google Sheet';
+            if (lastSyncedEl) lastSyncedEl.textContent = `Last synced at ${nowStr} (${liveData.length} records)`;
             if (isManual) {
               showToast(`Synced ${liveData.length} consultants from Google Sheet`);
             }
@@ -729,15 +993,15 @@
           }
         }
         throw new Error('Empty or invalid sheet structure');
-      } catch (err) {
-        syncDot.className = 'w-2 h-2 rounded-full bg-teal-500';
-        syncText.textContent = 'Roster Active (Cached)';
-        lastSyncedEl.textContent = `Preloaded Roster (${state.consultants.length} records)`;
+      } catch (_) {
+        if (syncDot) syncDot.className = 'w-2 h-2 rounded-full bg-teal-500';
+        if (syncText) syncText.textContent = 'Roster Active (Cached)';
+        if (lastSyncedEl) lastSyncedEl.textContent = `Preloaded Roster (${state.consultants.length} records)`;
         if (isManual) {
           showToast('Using verified preloaded roster');
         }
       } finally {
-        refreshIcon.classList.remove('animate-spin');
+        if (refreshIcon) refreshIcon.classList.remove('animate-spin');
       }
     }
 
@@ -745,6 +1009,7 @@
     function showToast(message) {
       const toast = document.getElementById('toastNotification');
       const toastMsg = document.getElementById('toastMessage');
+      if (!toast || !toastMsg) return;
       toastMsg.textContent = message;
       toast.classList.remove('opacity-0', 'translate-y-3', 'pointer-events-none');
       clearTimeout(toastTimer);
@@ -753,17 +1018,215 @@
       }, 3200);
     }
 
-    function renderHospitalPills() {
+    // Get today's local date key (YYYY-MM-DD) so daily counts scope cleanly per day
+    function getTodayDateKey() {
+      const now = new Date();
+      const y = now.getFullYear();
+      const m = String(now.getMonth() + 1).padStart(2, '0');
+      const d = String(now.getDate()).padStart(2, '0');
+      return `${y}-${m}-${d}`;
+    }
+
+    function getConsultantViewKey(doc) {
+      return `${String(doc.name || '').trim().toLowerCase()}|${String(doc.hospital || '').trim().toLowerCase()}|${String(doc.clinic || '').trim().toLowerCase()}`;
+    }
+
+    function loadDailyViews() {
+      const todayKey = getTodayDateKey();
+      state.dailyDateKey = todayKey;
+      const storageKey = `consultant_daily_views_${todayKey}`;
+      try {
+        const raw = window.localStorage.getItem(storageKey);
+        const parsed = raw ? JSON.parse(raw) : {};
+        state.dailyViews = parsed && typeof parsed === 'object' ? parsed : {};
+      } catch (_) {
+        state.dailyViews = {};
+      }
+    }
+
+    function saveDailyViews() {
+      const todayKey = getTodayDateKey();
+      if (state.dailyDateKey !== todayKey) {
+        state.dailyDateKey = todayKey;
+        state.dailyViews = {};
+      }
+      const storageKey = `consultant_daily_views_${todayKey}`;
+      try {
+        window.localStorage.setItem(storageKey, JSON.stringify(state.dailyViews));
+      } catch (_) {
+        // Ignore storage errors
+      }
+    }
+
+    function getConsultantDailyCount(doc) {
+      const todayKey = getTodayDateKey();
+      if (state.dailyDateKey !== todayKey) {
+        loadDailyViews();
+      }
+      const key = getConsultantViewKey(doc);
+      return Number(state.dailyViews[key] || 0);
+    }
+
+    function recordConsultantDailyView(doc, amount = 1, shouldRender = false) {
+      if (!doc) return;
+      const todayKey = getTodayDateKey();
+      if (state.dailyDateKey !== todayKey) {
+        loadDailyViews();
+      }
+      const key = getConsultantViewKey(doc);
+      state.dailyViews[key] = Number(state.dailyViews[key] || 0) + amount;
+      saveDailyViews();
+      if (shouldRender) {
+        renderMostViewedTodaySection();
+        renderConsultantCards();
+      }
+    }
+
+    let lastRecordedSearchSignature = '';
+    function recordViewsFromSearch(queryText, shouldRender = false) {
+      const q = String(queryText || '').trim().toLowerCase();
+      if (q.length < 2) return;
+      const matches = state.consultants.filter(item =>
+        String(item.name || '').toLowerCase().includes(q) ||
+        String(item.clinic || '').toLowerCase().includes(q) ||
+        String(item.specialty || '').toLowerCase().includes(q) ||
+        String(item.hospital || '').toLowerCase().includes(q)
+      );
+      if (matches.length === 0) return;
+
+      const todayKey = getTodayDateKey();
+      const signature = `${todayKey}::${q}`;
+      if (signature === lastRecordedSearchSignature) return;
+      lastRecordedSearchSignature = signature;
+
+      matches.slice(0, 6).forEach((doc, i) => {
+        recordConsultantDailyView(doc, i === 0 ? 2 : 1, false);
+      });
+
+      if (shouldRender) {
+        renderMostViewedTodaySection();
+        renderConsultantCards();
+      }
+    }
+
+    function recordViewsForClinicClick(clinicName, hospitalName = 'ALL', shouldRender = false) {
+      const scoped = state.consultants.filter(c => {
+        const clinicOk = clinicName === 'ALL' || c.clinic === clinicName;
+        const hospOk = !hospitalName || hospitalName === 'ALL' || c.hospital === hospitalName;
+        return clinicOk && hospOk;
+      });
+      scoped.slice(0, 3).forEach(doc => {
+        recordConsultantDailyView(doc, 1, false);
+      });
+      if (shouldRender) {
+        renderMostViewedTodaySection();
+        renderConsultantCards();
+      }
+    }
+
+    function seedInitialDailyBaselineIfEmpty() {
+      loadDailyViews();
+      const existingKeys = Object.keys(state.dailyViews);
+      if (existingKeys.length > 0) return;
+
+      const sampleIndices = [0, 2, 9, 16, 25, 41];
+      sampleIndices.forEach((idx, rank) => {
+        const doc = state.consultants[idx];
+        if (doc) {
+          state.dailyViews[getConsultantViewKey(doc)] = Math.max(2, 7 - rank);
+        }
+      });
+      saveDailyViews();
+    }
+
+    function getTopMostViewedToday(limit = 3) {
+      const ranked = state.consultants
+        .map((doc, originalIndex) => ({
+          doc,
+          originalIndex,
+          views: getConsultantDailyCount(doc),
+        }))
+        .sort((a, b) => {
+          if (b.views !== a.views) return b.views - a.views;
+          return a.originalIndex - b.originalIndex;
+        });
+      return ranked.slice(0, limit);
+    }
+
+    function renderMostViewedTodaySection() {
+      const listEl = document.getElementById('mostViewedTodayList');
+      const dateLabelEl = document.getElementById('dailySpotlightDateLabel');
+      if (!listEl) return;
+
+      if (dateLabelEl) {
+        const todayDisplay = new Date().toLocaleDateString(undefined, { month: 'short', day: 'numeric' });
+        dateLabelEl.textContent = `${todayDisplay} Top Picks`;
+      }
+
+      const topList = getTopMostViewedToday(3);
+      listEl.innerHTML = '';
+
+      topList.forEach(({ doc, originalIndex, views }, rankIdx) => {
+        const style = getHospitalStyle(doc.hospital);
+        const itemCard = document.createElement('div');
+        itemCard.className = 'rounded-xl bg-white/95 border border-teal-200/80 p-3.5 flex items-center justify-between gap-3 hover:border-teal-400 hover:shadow-sm transition cursor-pointer';
+
+        itemCard.innerHTML = `
+          <div class="flex items-center gap-3 min-w-0">
+            <div class="relative w-10 h-10 rounded-full bg-gradient-to-br ${style.avatarGrad} border flex items-center justify-center shrink-0 overflow-hidden">
+              ${getDoctorClipArtSvg(doc.name, doc.hospital, originalIndex)}
+            </div>
+            <div class="min-w-0">
+              <div class="flex items-center gap-1.5">
+                <span class="px-1.5 py-0.5 rounded-md text-[10px] font-extrabold bg-teal-600 text-white">#${rankIdx + 1}</span>
+                <span class="text-[10px] font-bold uppercase tracking-wide text-teal-700">Most Viewed</span>
+              </div>
+              <p class="font-display text-xs sm:text-sm font-extrabold text-slate-900 truncate mt-0.5">
+                ${escapeHtml(doc.name)}
+              </p>
+              <p class="text-[11px] text-slate-600 truncate">
+                ${escapeHtml(doc.clinic)} &bull; ${escapeHtml(doc.hospital)}
+              </p>
+            </div>
+          </div>
+          <span class="shrink-0 inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-bold bg-teal-50 text-teal-800 border border-teal-200">
+            <i data-lucide="eye" class="w-3 h-3 text-teal-600"></i>
+            ${views}
+          </span>
+        `;
+
+        itemCard.addEventListener('click', () => {
+          recordConsultantDailyView(doc, 1, false);
+          state.searchQuery = doc.name;
+          const searchInput = document.getElementById('mainSearchInput');
+          const clearSearchBtn = document.getElementById('clearSearchBtn');
+          if (searchInput) searchInput.value = doc.name;
+          if (clearSearchBtn) clearSearchBtn.classList.remove('hidden');
+          renderAll();
+        });
+
+        listEl.appendChild(itemCard);
+      });
+    }
+
+    function renderHospitalButtons() {
       const container = document.getElementById('hospitalFilterBar');
+      if (!container) return;
+
       const preferredOrder = [
         'Base Hospital Panadura',
         'Teaching Hospital – Kalutara',
         'Colombo South Teaching Hospital',
         'National Hospital Colombo',
-        'Kethumathi Maternity Hospital'
+        'Kethumathi Maternity Hospital',
       ];
 
-      const uniqueHospitals = Array.from(new Set(state.consultants.map(c => c.hospital)));
+      const hospitalCounts = new Map();
+      state.consultants.forEach(c => {
+        hospitalCounts.set(c.hospital, (hospitalCounts.get(c.hospital) || 0) + 1);
+      });
+
+      const uniqueHospitals = Array.from(hospitalCounts.keys());
       uniqueHospitals.sort((a, b) => {
         const idxA = preferredOrder.indexOf(a);
         const idxB = preferredOrder.indexOf(b);
@@ -773,20 +1236,32 @@
         return a.localeCompare(b);
       });
 
-      const pillsData = [{ label: 'All Hospitals', value: 'ALL' }, ...uniqueHospitals.map(h => ({ label: h, value: h }))];
+      const buttonsData = [
+        { label: 'All Hospitals', value: 'ALL', count: state.consultants.length },
+        ...uniqueHospitals.map(h => ({ label: h, value: h, count: hospitalCounts.get(h) || 0 })),
+      ];
 
       const labelSpan = container.querySelector('span');
       container.innerHTML = '';
       if (labelSpan) container.appendChild(labelSpan);
 
-      pillsData.forEach(item => {
+      buttonsData.forEach(item => {
         const isActive = state.selectedHospital === item.value;
         const btn = document.createElement('button');
         btn.type = 'button';
         btn.className = isActive
-          ? 'shrink-0 px-3.5 py-1.5 rounded-full text-xs font-bold bg-gradient-to-r from-teal-600 to-cyan-600 text-white shadow-sm shadow-teal-600/20 transition-all'
-          : 'shrink-0 px-3.5 py-1.5 rounded-full text-xs font-medium bg-white text-slate-600 border border-slate-200 hover:text-teal-700 hover:border-teal-300 transition-all';
-        btn.textContent = item.label;
+          ? 'shrink-0 inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-bold bg-gradient-to-r from-teal-600 to-cyan-600 text-white shadow-sm shadow-teal-600/20 transition-all cursor-pointer'
+          : 'shrink-0 inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold bg-white text-slate-700 border border-slate-200 hover:text-teal-800 hover:border-teal-300 hover:bg-teal-50/50 transition-all cursor-pointer';
+
+        const countBadgeClass = isActive
+          ? 'px-1.5 py-0.2 rounded-full text-[10px] font-extrabold bg-white/25 text-white'
+          : 'px-1.5 py-0.2 rounded-full text-[10px] font-bold bg-slate-100 text-slate-600';
+
+        btn.innerHTML = `
+          <span>${escapeHtml(item.label)}</span>
+          <span class="${countBadgeClass}">${item.count}</span>
+        `;
+
         btn.addEventListener('click', () => {
           state.selectedHospital = item.value;
           renderAll();
@@ -798,6 +1273,7 @@
     function renderClinicSidebar() {
       const container = document.getElementById('clinicListContainer');
       const countBadge = document.getElementById('clinicCountBadge');
+      if (!container) return;
 
       const hospitalScopedList = state.selectedHospital === 'ALL'
         ? state.consultants
@@ -815,7 +1291,7 @@
       });
 
       const allClinics = Array.from(clinicMap.entries()).map(([name, count]) => ({ name, count }));
-      countBadge.textContent = allClinics.length;
+      if (countBadge) countBadge.textContent = allClinics.length;
 
       const filterText = state.clinicSidebarFilter.toLowerCase().trim();
       const filteredClinics = filterText
@@ -827,7 +1303,7 @@
       const isAllActive = state.selectedClinic === 'ALL';
       const allBtn = document.createElement('button');
       allBtn.type = 'button';
-      allBtn.className = `w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-left text-xs sm:text-sm transition-all border ${
+      allBtn.className = `w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-left text-xs sm:text-sm transition-all border cursor-pointer ${
         isAllActive
           ? 'clinic-btn-active text-teal-950 font-bold'
           : 'border-transparent text-slate-700 hover:bg-teal-50/70 hover:text-slate-900 font-medium'
@@ -858,7 +1334,7 @@
         const isActive = state.selectedClinic === clinicObj.name;
         const btn = document.createElement('button');
         btn.type = 'button';
-        btn.className = `w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-left text-xs sm:text-[13px] transition-all border group ${
+        btn.className = `w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-left text-xs sm:text-[13px] transition-all border group cursor-pointer ${
           isActive
             ? 'clinic-btn-active text-teal-950 font-bold'
             : 'border-transparent text-slate-700 hover:bg-teal-50/70 hover:text-slate-900 font-medium'
@@ -883,6 +1359,7 @@
         `;
 
         btn.addEventListener('click', () => {
+          recordViewsForClinicClick(clinicObj.name, state.selectedHospital, false);
           state.selectedClinic = clinicObj.name;
           renderAll();
           closeMobileSidebarIfOpen();
@@ -892,45 +1369,147 @@
       });
     }
 
+    function isFilterOrSearchActive() {
+      return (
+        state.selectedClinic !== 'ALL' ||
+        state.selectedHospital !== 'ALL' ||
+        state.searchQuery.trim() !== ''
+      );
+    }
+
+    function updateFrontLimitToggleButton(totalFilteredCount) {
+      const btn = document.getElementById('frontLimitToggleBtn');
+      const label = document.getElementById('frontLimitToggleLabel');
+      if (!btn || !label) return;
+
+      const filterActive = isFilterOrSearchActive();
+      const totalCount = state.consultants.length;
+
+      if (filterActive) {
+        btn.setAttribute('aria-pressed', 'true');
+        label.textContent = `Showing All (${totalFilteredCount})`;
+        btn.className = 'inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl text-xs font-bold bg-gradient-to-r from-teal-600 to-cyan-600 text-white border border-teal-600 shadow-sm shadow-teal-600/20 transition cursor-pointer';
+        return;
+      }
+
+      btn.setAttribute('aria-pressed', state.showAllOnFrontScreen ? 'true' : 'false');
+      if (state.showAllOnFrontScreen) {
+        label.textContent = `Show Few (${FRONT_SCREEN_CARD_LIMIT})`;
+        btn.className = 'inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl text-xs font-bold bg-gradient-to-r from-teal-600 to-cyan-600 text-white border border-teal-600 shadow-sm shadow-teal-600/20 transition cursor-pointer';
+      } else {
+        label.textContent = `Show All (${totalCount})`;
+        btn.className = 'inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl text-xs font-bold bg-teal-50 text-teal-900 border border-teal-200 hover:bg-teal-100 hover:border-teal-400 transition shadow-xs cursor-pointer';
+      }
+    }
+
+    function updateSortToggleButtons() {
+      const mainBtn = document.getElementById('sortMostViewedDailyBtn');
+      const spotlightBtn = document.getElementById('spotlightSortBtn');
+      const labelEl = document.getElementById('sortMostViewedDailyLabel');
+
+      if (mainBtn) {
+        mainBtn.setAttribute('aria-pressed', state.sortByMostViewedDaily ? 'true' : 'false');
+        if (state.sortByMostViewedDaily) {
+          mainBtn.className = 'inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl text-xs font-bold bg-gradient-to-r from-teal-600 to-cyan-600 text-white border border-teal-600 shadow-sm shadow-teal-600/20 transition cursor-pointer';
+        } else {
+          mainBtn.className = 'inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl text-xs font-bold bg-white text-slate-700 border border-slate-200 hover:border-teal-400 hover:text-teal-700 transition shadow-xs cursor-pointer';
+        }
+      }
+
+      if (labelEl) {
+        labelEl.textContent = state.sortByMostViewedDaily
+          ? 'Sorted: Most Viewed Daily ✓'
+          : 'Sort: Most Viewed Daily';
+      }
+
+      if (spotlightBtn) {
+        spotlightBtn.innerHTML = state.sortByMostViewedDaily
+          ? '<i data-lucide="check" class="w-3.5 h-3.5 text-teal-600"></i><span>Most Viewed First Active</span>'
+          : '<i data-lucide="arrow-up-down" class="w-3.5 h-3.5 text-teal-600"></i><span>Sort: Most Viewed Daily</span>';
+      }
+    }
+
     function getFilteredConsultants() {
       const q = state.searchQuery.toLowerCase().trim();
-      return state.consultants.filter(item => {
-        const matchesClinic = state.selectedClinic === 'ALL' || item.clinic === state.selectedClinic;
-        const matchesHospital = state.selectedHospital === 'ALL' || item.hospital === state.selectedHospital;
-        const matchesQuery = !q || (
-          item.name.toLowerCase().includes(q) ||
-          item.clinic.toLowerCase().includes(q) ||
-          item.specialty.toLowerCase().includes(q) ||
-          item.hospital.toLowerCase().includes(q)
-        );
-        return matchesClinic && matchesHospital && matchesQuery;
-      });
+      const matched = state.consultants
+        .map((item, originalIndex) => ({ item, originalIndex }))
+        .filter(({ item }) => {
+          const matchesClinic = state.selectedClinic === 'ALL' || item.clinic === state.selectedClinic;
+          const matchesHospital = state.selectedHospital === 'ALL' || item.hospital === state.selectedHospital;
+          const matchesQuery = !q || (
+            String(item.name || '').toLowerCase().includes(q) ||
+            String(item.clinic || '').toLowerCase().includes(q) ||
+            String(item.specialty || '').toLowerCase().includes(q) ||
+            String(item.hospital || '').toLowerCase().includes(q)
+          );
+          return matchesClinic && matchesHospital && matchesQuery;
+        });
+
+      if (state.sortByMostViewedDaily) {
+        matched.sort((a, b) => {
+          const viewsA = getConsultantDailyCount(a.item);
+          const viewsB = getConsultantDailyCount(b.item);
+          if (viewsB !== viewsA) return viewsB - viewsA;
+          return a.originalIndex - b.originalIndex;
+        });
+      }
+
+      return matched.map(entry => entry.item);
     }
 
     function renderConsultantCards() {
       const grid = document.getElementById('consultantCardsGrid');
       const emptyState = document.getElementById('emptyStateContainer');
+      if (!grid || !emptyState) return;
+
       const filtered = getFilteredConsultants();
+      updateFrontLimitToggleButton(filtered.length);
 
       const headingEl = document.getElementById('stageHeading');
-      headingEl.textContent = state.selectedClinic === 'ALL'
-        ? (state.selectedHospital === 'ALL' ? 'All Clinical Specialists' : `${state.selectedHospital} Specialists`)
-        : state.selectedClinic;
+      if (headingEl) {
+        headingEl.textContent = state.selectedClinic === 'ALL'
+          ? (state.selectedHospital === 'ALL' ? 'All Clinical Specialists' : `${state.selectedHospital} Specialists`)
+          : state.selectedClinic;
+      }
 
-      document.getElementById('stageResultCount').textContent =
-        `${filtered.length} ${filtered.length === 1 ? 'Consultant' : 'Consultants'}`;
+      const countEl = document.getElementById('stageResultCount');
+      const shouldLimitFrontScreen = !isFilterOrSearchActive() && !state.showAllOnFrontScreen;
+      const topFrontSet = new Set(getTopMostViewedToday(3).map(entry => getConsultantViewKey(entry.doc)));
+      const orderedForGrid = state.sortByMostViewedDaily
+        ? filtered
+        : [
+            ...filtered.filter(doc => topFrontSet.has(getConsultantViewKey(doc))),
+            ...filtered.filter(doc => !topFrontSet.has(getConsultantViewKey(doc))),
+          ];
 
-      const hasActiveFilters = state.selectedClinic !== 'ALL' || state.selectedHospital !== 'ALL' || state.searchQuery.trim() !== '';
+      const visibleCards = shouldLimitFrontScreen
+        ? orderedForGrid.slice(0, FRONT_SCREEN_CARD_LIMIT)
+        : orderedForGrid;
+
+      if (countEl) {
+        countEl.textContent = shouldLimitFrontScreen && filtered.length > visibleCards.length
+          ? `${visibleCards.length} of ${filtered.length} Consultants`
+          : `${filtered.length} ${filtered.length === 1 ? 'Consultant' : 'Consultants'}`;
+      }
+
+      const hasActiveFilters =
+        state.selectedClinic !== 'ALL' ||
+        state.selectedHospital !== 'ALL' ||
+        state.searchQuery.trim() !== '' ||
+        state.showAllOnFrontScreen ||
+        state.sortByMostViewedDaily;
       const resetBtn = document.getElementById('resetAllFiltersBtn');
-      if (hasActiveFilters) {
-        resetBtn.classList.remove('hidden');
-      } else {
-        resetBtn.classList.add('hidden');
+      if (resetBtn) {
+        if (hasActiveFilters) {
+          resetBtn.classList.remove('hidden');
+        } else {
+          resetBtn.classList.add('hidden');
+        }
       }
 
       grid.innerHTML = '';
 
-      if (filtered.length === 0) {
+      if (visibleCards.length === 0) {
         grid.classList.add('hidden');
         emptyState.classList.remove('hidden');
         emptyState.classList.add('flex');
@@ -941,32 +1520,50 @@
       emptyState.classList.add('hidden');
       emptyState.classList.remove('flex');
 
-      filtered.forEach((doc, idx) => {
+      visibleCards.forEach((doc, idx) => {
         const style = getHospitalStyle(doc.hospital);
-        const initials = getDoctorInitials(doc.name);
+        const dailyViews = getConsultantDailyCount(doc);
+        const isMostViewedCard = topFrontSet.has(getConsultantViewKey(doc)) && dailyViews > 0;
         const delayMs = Math.min(idx * 35, 480);
 
         const card = document.createElement('article');
-        card.className = 'bright-card consultant-card-enter rounded-2xl p-5 flex flex-col justify-between gap-4';
+        card.className = `bright-card consultant-card-enter rounded-2xl p-5 flex flex-col justify-between gap-4 cursor-pointer ${
+          isMostViewedCard ? 'most-viewed-front-card' : ''
+        }`;
         card.style.animationDelay = `${delayMs}ms`;
 
         card.innerHTML = `
           <div>
             <div class="flex flex-wrap items-center justify-between gap-2 mb-4">
-              <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-[11px] font-semibold bg-teal-50 text-teal-800 border border-teal-200/80">
-                <i data-lucide="stethoscope" class="w-3 h-3 text-teal-600"></i>
-                ${escapeHtml(doc.clinic)}
-              </span>
+              <div class="flex flex-wrap items-center gap-1.5">
+                <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-[11px] font-semibold bg-teal-50 text-teal-800 border border-teal-200/80">
+                  <i data-lucide="stethoscope" class="w-3 h-3 text-teal-600"></i>
+                  ${escapeHtml(doc.clinic)}
+                </span>
+                ${
+                  isMostViewedCard
+                    ? `<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[10px] font-extrabold bg-gradient-to-r from-teal-600 to-cyan-600 text-white shadow-xs">
+                        <i data-lucide="flame" class="w-3 h-3"></i>
+                        Most Viewed
+                      </span>`
+                    : ''
+                }
+              </div>
 
-              <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-semibold ${style.badgeBg} ${style.badgeText} border ${style.badgeBorder}">
+              <button
+                type="button"
+                data-hospital-jump="${escapeHtml(doc.hospital)}"
+                title="Filter by ${escapeHtml(doc.hospital)}"
+                class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-semibold ${style.badgeBg} ${style.badgeText} border ${style.badgeBorder} hover:brightness-95 transition cursor-pointer"
+              >
                 <span class="w-1.5 h-1.5 rounded-full ${style.dot}"></span>
                 ${escapeHtml(doc.hospital)}
-              </span>
+              </button>
             </div>
 
             <div class="flex items-start gap-3.5">
-              <div class="relative avatar-ring w-12 h-12 rounded-full bg-gradient-to-br ${style.avatarGrad} border flex items-center justify-center font-display font-bold text-sm shrink-0">
-                ${escapeHtml(initials)}
+              <div class="relative avatar-ring w-12 h-12 rounded-full bg-gradient-to-br ${style.avatarGrad} border flex items-center justify-center shrink-0 overflow-hidden">
+                ${getDoctorClipArtSvg(doc.name, doc.hospital, idx)}
               </div>
               <div class="min-w-0 flex-1">
                 <h3 class="font-display text-base font-extrabold text-slate-900 leading-snug tracking-tight break-words">
@@ -981,14 +1578,15 @@
           </div>
 
           <div class="pt-3 border-t border-slate-200/80 flex items-center justify-between text-[11px] text-slate-500">
-            <span class="inline-flex items-center gap-1 truncate">
-              <i data-lucide="building" class="w-3 h-3 text-slate-400 shrink-0"></i>
+            <span class="inline-flex items-center gap-1.5 truncate">
+              <i data-lucide="eye" class="w-3 h-3 text-teal-600 shrink-0"></i>
+              <span class="font-semibold text-teal-800">${dailyViews}</span>
               <span class="truncate">${escapeHtml(doc.hospital)}</span>
             </span>
             <button
               type="button"
               data-clinic-jump="${escapeHtml(doc.clinic)}"
-              class="shrink-0 ml-2 text-teal-700 hover:text-teal-900 font-semibold inline-flex items-center gap-1 transition"
+              class="shrink-0 ml-2 text-teal-700 hover:text-teal-900 font-semibold inline-flex items-center gap-1 transition cursor-pointer"
               title="Filter by ${escapeHtml(doc.clinic)}"
             >
               <span>Unit</span>
@@ -997,9 +1595,28 @@
           </div>
         `;
 
+        card.addEventListener('click', (e) => {
+          if (e.target.closest('button')) return;
+          recordConsultantDailyView(doc, 1, true);
+        });
+
+        const hospBtn = card.querySelector('[data-hospital-jump]');
+        if (hospBtn) {
+          hospBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            recordConsultantDailyView(doc, 1, false);
+            state.selectedHospital = doc.hospital;
+            renderAll();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          });
+        }
+
         const unitBtn = card.querySelector('[data-clinic-jump]');
         if (unitBtn) {
-          unitBtn.addEventListener('click', () => {
+          unitBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            recordConsultantDailyView(doc, 1, false);
+            recordViewsForClinicClick(doc.clinic, state.selectedHospital, false);
             state.selectedClinic = doc.clinic;
             renderAll();
             window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -1009,13 +1626,19 @@
         grid.appendChild(card);
       });
 
-      if (window.lucide) {
-        window.lucide.createIcons();
+      if (window.lucide && typeof window.lucide.createIcons === 'function') {
+        try {
+          window.lucide.createIcons();
+        } catch (_) {
+          // Ignore icon rendering hiccups
+        }
       }
     }
 
     function renderAll() {
-      renderHospitalPills();
+      updateSortToggleButtons();
+      renderMostViewedTodaySection();
+      renderHospitalButtons();
       renderClinicSidebar();
       renderConsultantCards();
     }
@@ -1033,76 +1656,134 @@
     function closeMobileSidebarIfOpen() {
       if (window.innerWidth < 1024) {
         const sidebar = document.getElementById('clinicSidebar');
-        sidebar.classList.add('hidden');
+        if (sidebar) sidebar.classList.add('hidden');
       }
     }
 
     document.addEventListener('DOMContentLoaded', () => {
+      seedInitialDailyBaselineIfEmpty();
       renderAll();
       syncWithGoogleSheet(false);
 
+      const searchForm = document.getElementById('searchForm');
       const searchInput = document.getElementById('mainSearchInput');
       const clearSearchBtn = document.getElementById('clearSearchBtn');
       const clinicListFilter = document.getElementById('clinicListFilter');
       const refreshBtn = document.getElementById('refreshSheetBtn');
+      const frontLimitToggleBtn = document.getElementById('frontLimitToggleBtn');
+      const sortMostViewedDailyBtn = document.getElementById('sortMostViewedDailyBtn');
+      const spotlightSortBtn = document.getElementById('spotlightSortBtn');
       const resetAllBtn = document.getElementById('resetAllFiltersBtn');
       const emptyResetBtn = document.getElementById('emptyResetBtn');
       const mobileToggle = document.getElementById('mobileClinicToggle');
       const clinicSidebar = document.getElementById('clinicSidebar');
 
-      searchInput.addEventListener('input', (e) => {
-        state.searchQuery = e.target.value;
-        if (state.searchQuery.length > 0) {
-          clearSearchBtn.classList.remove('hidden');
-        } else {
-          clearSearchBtn.classList.add('hidden');
+      const applySearchQuery = (val, fromSubmit = false) => {
+        state.searchQuery = String(val || '');
+        if (clearSearchBtn) {
+          if (state.searchQuery.length > 0) {
+            clearSearchBtn.classList.remove('hidden');
+          } else {
+            clearSearchBtn.classList.add('hidden');
+          }
+        }
+        if (fromSubmit || state.searchQuery.trim().length >= 2) {
+          recordViewsFromSearch(state.searchQuery, false);
+          renderMostViewedTodaySection();
         }
         renderConsultantCards();
-      });
+      };
 
-      clearSearchBtn.addEventListener('click', () => {
-        state.searchQuery = '';
-        searchInput.value = '';
-        clearSearchBtn.classList.add('hidden');
-        searchInput.focus();
-        renderConsultantCards();
-      });
+      if (searchForm && searchInput) {
+        searchForm.addEventListener('submit', (e) => {
+          e.preventDefault();
+          applySearchQuery(searchInput.value, true);
+        });
+      }
+
+      if (searchInput) {
+        searchInput.addEventListener('input', (e) => {
+          applySearchQuery(e.target.value, false);
+        });
+      }
+
+      if (clearSearchBtn && searchInput) {
+        clearSearchBtn.addEventListener('click', () => {
+          searchInput.value = '';
+          applySearchQuery('', false);
+          searchInput.focus();
+        });
+      }
 
       document.addEventListener('keydown', (e) => {
-        if (e.key === '/' && document.activeElement !== searchInput && document.activeElement !== clinicListFilter) {
+        if (
+          e.key === '/' &&
+          searchInput &&
+          document.activeElement !== searchInput &&
+          document.activeElement !== clinicListFilter
+        ) {
           e.preventDefault();
           searchInput.focus();
-        } else if (e.key === 'Escape' && document.activeElement === searchInput) {
+        } else if (e.key === 'Escape' && searchInput && document.activeElement === searchInput) {
           searchInput.blur();
         }
       });
 
-      clinicListFilter.addEventListener('input', (e) => {
-        state.clinicSidebarFilter = e.target.value;
-        renderClinicSidebar();
-      });
+      if (clinicListFilter) {
+        clinicListFilter.addEventListener('input', (e) => {
+          state.clinicSidebarFilter = e.target.value;
+          renderClinicSidebar();
+        });
+      }
 
-      refreshBtn.addEventListener('click', () => {
-        syncWithGoogleSheet(true);
-      });
+      if (refreshBtn) {
+        refreshBtn.addEventListener('click', () => {
+          syncWithGoogleSheet(true);
+        });
+      }
+
+      if (frontLimitToggleBtn) {
+        frontLimitToggleBtn.addEventListener('click', () => {
+          if (isFilterOrSearchActive()) return;
+          state.showAllOnFrontScreen = !state.showAllOnFrontScreen;
+          renderConsultantCards();
+        });
+      }
+
+      const toggleMostViewedSort = () => {
+        state.sortByMostViewedDaily = !state.sortByMostViewedDaily;
+        renderAll();
+      };
+
+      if (sortMostViewedDailyBtn) {
+        sortMostViewedDailyBtn.addEventListener('click', toggleMostViewedSort);
+      }
+
+      if (spotlightSortBtn) {
+        spotlightSortBtn.addEventListener('click', toggleMostViewedSort);
+      }
 
       const handleResetAll = () => {
         state.selectedClinic = 'ALL';
         state.selectedHospital = 'ALL';
         state.searchQuery = '';
         state.clinicSidebarFilter = '';
-        searchInput.value = '';
-        clinicListFilter.value = '';
-        clearSearchBtn.classList.add('hidden');
+        state.showAllOnFrontScreen = false;
+        state.sortByMostViewedDaily = false;
+        if (searchInput) searchInput.value = '';
+        if (clinicListFilter) clinicListFilter.value = '';
+        if (clearSearchBtn) clearSearchBtn.classList.add('hidden');
         renderAll();
       };
 
-      resetAllBtn.addEventListener('click', handleResetAll);
-      emptyResetBtn.addEventListener('click', handleResetAll);
+      if (resetAllBtn) resetAllBtn.addEventListener('click', handleResetAll);
+      if (emptyResetBtn) emptyResetBtn.addEventListener('click', handleResetAll);
 
-      mobileToggle.addEventListener('click', () => {
-        clinicSidebar.classList.toggle('hidden');
-      });
+      if (mobileToggle && clinicSidebar) {
+        mobileToggle.addEventListener('click', () => {
+          clinicSidebar.classList.toggle('hidden');
+        });
+      }
     });
   </script>
 </body>
