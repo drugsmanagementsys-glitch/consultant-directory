@@ -17,6 +17,7 @@
   <script src="https://unpkg.com/lucide@latest"></script>
 
   <script>
+    // Configure custom font families for clean medical editorial legibility
     tailwind.config = {
       theme: {
         extend: {
@@ -30,7 +31,7 @@
   </script>
 
   <style>
-    /* Bright Light Palette (#f4fbf9 with soft teal, sky, and emerald gradients; zero dark surfaces) */
+    /* Bright Light Color Palette (#f4fbf9 with soft mint, teal, sky, and emerald gradients; zero dark backgrounds) */
     body {
       background-color: #f4fbf9;
       color: #0f172a;
@@ -58,7 +59,7 @@
       background: #0d9488;
     }
 
-    /* Animated Hospital Background Keyframes */
+    /* Animated Light-Mode Hospital Background Keyframes */
     @keyframes floatBrightSlow {
       0%, 100% {
         transform: translateY(0px) rotate(0deg) scale(1);
@@ -129,11 +130,11 @@
       animation: cardBrightReveal 0.48s cubic-bezier(0.22, 1, 0.36, 1) forwards;
     }
 
-    /* Bright Frosted Card + Shimmer Sweep */
+    /* Crisp White Frosted Card + Hover Shimmer Sweep */
     .bright-card {
       position: relative;
       overflow: hidden;
-      background: linear-gradient(155deg, rgba(255, 255, 255, 0.96) 0%, rgba(247, 253, 251, 0.92) 100%);
+      background: linear-gradient(155deg, rgba(255, 255, 255, 0.97) 0%, rgba(247, 253, 251, 0.93) 100%);
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
       border: 1px solid rgba(13, 148, 136, 0.16);
@@ -205,7 +206,7 @@
 
     /* Most Viewed Daily Spotlight & Badge Styling */
     .most-viewed-spotlight {
-      background: linear-gradient(120deg, rgba(255, 255, 255, 0.96) 0%, rgba(240, 253, 250, 0.94) 55%, rgba(240, 249, 255, 0.94) 100%);
+      background: linear-gradient(120deg, rgba(255, 255, 255, 0.97) 0%, rgba(240, 253, 250, 0.94) 55%, rgba(240, 249, 255, 0.94) 100%);
       border: 1px solid rgba(13, 148, 136, 0.22);
       box-shadow: 0 10px 26px -12px rgba(13, 148, 136, 0.18);
     }
@@ -215,7 +216,14 @@
       box-shadow: 0 12px 28px -10px rgba(13, 148, 136, 0.2), 0 4px 12px -4px rgba(2, 132, 199, 0.12);
     }
 
-    /* Tiny CSS-Only Glitch Effect for Top Attribution Strip */
+    /* Highlighted Current Hospital Banner on Every Card */
+    .current-hospital-highlight {
+      background: linear-gradient(90deg, rgba(240, 253, 250, 0.95) 0%, rgba(240, 249, 255, 0.95) 100%);
+      border: 1px solid rgba(13, 148, 136, 0.28);
+      box-shadow: inset 3px 0 0 #0d9488;
+    }
+
+    /* Clean CSS-Only Glitch Effect for Tiny Top Attribution Bar (No Matrix Rain or Text Scrambling) */
     .tiny-glitch-strip {
       background: linear-gradient(90deg, #f0fdfa 0%, #f0f9ff 50%, #f0fdf4 100%);
       border-bottom: 1px solid rgba(13, 148, 136, 0.16);
@@ -320,7 +328,7 @@
 </head>
 <body class="min-h-screen flex flex-col antialiased selection:bg-teal-200 selection:text-teal-950">
 
-  <!-- Top Attribution Strip with Tiny Text & CSS-Only Glitch Effect -->
+  <!-- 1. Tiny Top Attribution Bar with Clean CSS-Only Glitch Effect -->
   <div class="tiny-glitch-strip relative z-40 w-full py-1 px-4 text-center select-none" aria-label="Developer attribution">
     <span class="tiny-glitch-text text-[10px]" data-text="Dev by DaNuka (D2F Systams)">
       Dev by DaNuka (D2F Systams)
@@ -395,7 +403,7 @@
     </svg>
   </div>
 
-  <!-- Sticky Top Header & Main Search Controls -->
+  <!-- 2. Sticky Header with Large Search Bar, Prominent Search Button, Sync Controls & Hospital Buttons -->
   <header class="sticky top-0 z-30 border-b border-teal-900/10 bg-white/90 backdrop-blur-xl shadow-sm">
     <div class="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 py-4">
       <div class="flex flex-col xl:flex-row xl:items-center xl:justify-between gap-4">
@@ -426,7 +434,7 @@
           </button>
         </div>
 
-        <!-- Large Search Bar + Prominent Search Button + Live Sync Controls -->
+        <!-- Large Search Input + Prominent Search Button + Live Sync Badge & Refresh Button -->
         <div class="flex flex-col md:flex-row items-stretch md:items-center gap-3 flex-1 xl:max-w-4xl">
           <form id="searchForm" class="flex items-stretch gap-2 flex-1" role="search">
             <div class="relative flex-1 group">
@@ -468,7 +476,7 @@
             </button>
           </form>
 
-          <!-- Live Sync Status Pill & Manual Refresh Button -->
+          <!-- Live Sync Status Badge + Manual Refresh Button -->
           <div class="flex items-center justify-between md:justify-end gap-2 shrink-0">
             <div
               id="syncStatusBadge"
@@ -489,13 +497,13 @@
         </div>
       </div>
 
-      <!-- Horizontal Row of Clickable Hospital Name Buttons with Live Counts -->
+      <!-- Horizontal Row of Clickable Hospital Filter Buttons with Live Consultant Counts -->
       <div class="mt-3.5 pt-3 border-t border-slate-200/80 flex items-center gap-2 overflow-x-auto pb-1 no-scrollbar" id="hospitalFilterBar">
         <span class="text-[11px] font-bold uppercase tracking-wider text-slate-500 mr-1 flex items-center gap-1 shrink-0">
           <i data-lucide="building-2" class="w-3.5 h-3.5 text-teal-600"></i>
           Hospitals:
         </span>
-        <!-- Hospital buttons populated dynamically -->
+        <!-- Hospital filter buttons populated dynamically -->
       </div>
     </div>
   </header>
@@ -503,7 +511,7 @@
   <!-- Main Workspace Layout -->
   <div class="relative z-10 flex-1 max-w-[1600px] w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 flex flex-col lg:flex-row gap-6">
 
-    <!-- Left Sidebar: Scrollable Clinics & Departments List with Live Counts -->
+    <!-- 4. Left-Hand Clinics & Departments Sidebar with Live Counts and Filter Input -->
     <aside id="clinicSidebar" class="hidden lg:flex flex-col w-full lg:w-80 xl:w-88 shrink-0">
       <div class="sticky top-44 rounded-2xl bg-white/90 backdrop-blur-xl border border-teal-900/12 shadow-lg shadow-teal-900/5 overflow-hidden flex flex-col max-h-[calc(100vh-12rem)]">
         <!-- Sidebar Header -->
@@ -539,10 +547,10 @@
       </div>
     </aside>
 
-    <!-- Main Stage: Consultant Cards Grid -->
+    <!-- 5. Main Stage: Most Viewed Today Spotlight, Controls & Consultant Cards Grid -->
     <main class="flex-1 min-w-0 flex flex-col gap-5">
 
-      <!-- Prominent "Most Viewed Today" Daily Spotlight Section -->
+      <!-- Prominent "Most Viewed Today" Daily Spotlight Strip -->
       <section id="mostViewedTodaySection" aria-label="Most Viewed Today" class="most-viewed-spotlight rounded-2xl p-4 sm:p-5">
         <div class="flex flex-wrap items-center justify-between gap-3 mb-3.5">
           <div class="flex items-center gap-2.5">
@@ -559,7 +567,7 @@
                 </span>
               </div>
               <p class="text-[11px] sm:text-xs text-slate-600">
-                Automatically tracked per day from searches, card views, and clinic clicks
+                Tracked daily in your browser from searches, card views, and clinic selections
               </p>
             </div>
           </div>
@@ -579,7 +587,7 @@
         </div>
       </section>
 
-      <!-- Active Filter Banner, Front-Screen Limit Toggle, Sort Toggle & Reset Control -->
+      <!-- Active Filter Banner, Show Few (6) / Show All Toggle, Sort Toggle & Reset Control -->
       <div class="flex flex-wrap items-center justify-between gap-3 px-1">
         <div class="flex items-center gap-2.5 flex-wrap">
           <h2 id="stageHeading" class="font-display text-lg sm:text-xl font-bold text-slate-900">
@@ -591,7 +599,7 @@
         </div>
 
         <div class="flex items-center gap-2 flex-wrap">
-          <!-- Front-Screen Card Limit Toggle ('Show All (62)' / 'Show Few (6)') -->
+          <!-- Front-Screen Card Limit Toggle ("Show All (62)" / "Show Few (6)") -->
           <button
             id="frontLimitToggleBtn"
             type="button"
@@ -685,10 +693,12 @@
 
   <script>
     const SHEET_ID = '1QddUsl1_hKiMFrtRw3wvDm5fcAFRyT3jiOPpDisGBWs';
-    const GVIZ_CSV_URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:csv&gid=0`;
+    const GVIZ_FULL_CSV_URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:csv&gid=0`;
+    // Range B8:B72 query for column B hospital names across rows 8 to 72
+    const GVIZ_COL_B_RANGE_URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:csv&gid=0&range=B8:B72`;
     const FRONT_SCREEN_CARD_LIMIT = 6;
 
-    // Preloaded 62-consultant regional hospital roster fallback
+    // Preloaded 62-consultant regional hospital roster across target hospitals
     const PRELOADED_CONSULTANTS = [
       { clinic: "Surgical Clinic", hospital: "Base Hospital Panadura", name: "Dr. Hasitha Udayakumara (A)", specialty: "Consultant General Surgeon" },
       { clinic: "Surgical Clinic", hospital: "Base Hospital Panadura", name: "Dr. Ajith Ranasinghe (B)", specialty: "Surgeon" },
@@ -700,12 +710,12 @@
       { clinic: "Paediatric Clinic", hospital: "Base Hospital Panadura", name: "Dr. Hemal De Silva (A)", specialty: "Paediatrician" },
       { clinic: "Paediatric Clinic", hospital: "Base Hospital Panadura", name: "Dr. Himali Jayaweera (B)", specialty: "Paediatrician" },
       { clinic: "Cardiology Clinic", hospital: "Base Hospital Panadura", name: "Dr. Thisal Semina", specialty: "Cardiologist" },
-      { clinic: "Cardiology Clinic", hospital: "Teaching Hospital – Kalutara", name: "Dr. M. Sathviraj", specialty: "Cardiologist" },
-      { clinic: "Cardiology Clinic", hospital: "Teaching Hospital – Kalutara", name: "Dr. Eranga Colombage", specialty: "Cardiologist" },
-      { clinic: "Cardiology Clinic", hospital: "Teaching Hospital – Kalutara", name: "Dr. Ravi Gajaweera", specialty: "Cardiologist" },
-      { clinic: "Cardiology Clinic", hospital: "Teaching Hospital – Kalutara", name: "Dr. Nilushka Rajapaksha", specialty: "Cardiologist" },
-      { clinic: "Vascular and Transplant Surgery", hospital: "Teaching Hospital – Kalutara", name: "Dr. Prageeth Lambiyas", specialty: "Vascular and Transplant Surgeon" },
-      { clinic: "Neurology Clinic", hospital: "Teaching Hospital – Kalutara", name: "Dr. Surangi Somarathna", specialty: "Neurologist" },
+      { clinic: "Cardiology Clinic", hospital: "Teaching Hospital - Kalutara", name: "Dr. M. Sathviraj", specialty: "Cardiologist" },
+      { clinic: "Cardiology Clinic", hospital: "Teaching Hospital - Kalutara", name: "Dr. Eranga Colombage", specialty: "Cardiologist" },
+      { clinic: "Cardiology Clinic", hospital: "Teaching Hospital - Kalutara", name: "Dr. Ravi Gajaweera", specialty: "Cardiologist" },
+      { clinic: "Cardiology Clinic", hospital: "Teaching Hospital - Kalutara", name: "Dr. Nilushka Rajapaksha", specialty: "Cardiologist" },
+      { clinic: "Vascular and Transplant Surgery", hospital: "Teaching Hospital - Kalutara", name: "Dr. Prageeth Lambiyas", specialty: "Vascular and Transplant Surgeon" },
+      { clinic: "Neurology Clinic", hospital: "Teaching Hospital - Kalutara", name: "Dr. Surangi Somarathna", specialty: "Neurologist" },
       { clinic: "Neurology Clinic", hospital: "Colombo South Teaching Hospital", name: "Prof. Saman Gunathilake", specialty: "Neurologist" },
       { clinic: "Neurology Clinic", hospital: "Colombo South Teaching Hospital", name: "Dr. Senaka Bandusena", specialty: "Neurologist" },
       { clinic: "Neurology Clinic", hospital: "Colombo South Teaching Hospital", name: "Dr. V.T. Rajendrian", specialty: "Neurologist" },
@@ -713,23 +723,23 @@
       { clinic: "Neurology Clinic", hospital: "National Hospital Colombo", name: "Dr. Bimsara Senanayake", specialty: "Neurologist" },
       { clinic: "Neurology Clinic", hospital: "National Hospital Colombo", name: "Dr. Senaka Bandusena", specialty: "Neurologist" },
       { clinic: "Neurology Clinic", hospital: "National Hospital Colombo", name: "Dr. Gamini Pathirana", specialty: "Neurologist" },
-      { clinic: "Endocrine Clinic", hospital: "Teaching Hospital – Kalutara", name: "Dr. Kamani Liyanarachchi", specialty: "Endocrinologist" },
+      { clinic: "Endocrine Clinic", hospital: "Teaching Hospital - Kalutara", name: "Dr. Kamani Liyanarachchi", specialty: "Endocrinologist" },
       { clinic: "Endocrine Clinic", hospital: "Colombo South Teaching Hospital", name: "Dr. Uditha Bulughapitiya", specialty: "Endocrinologist" },
       { clinic: "Endocrine Clinic", hospital: "National Hospital Colombo", name: "Dr. Manilka Sumanatilleke", specialty: "Endocrinologist" },
       { clinic: "Endocrine Clinic", hospital: "National Hospital Colombo", name: "Dr. Uditha Bulugahapitiya", specialty: "Endocrinologist" },
       { clinic: "Endocrine Clinic", hospital: "National Hospital Colombo", name: "Dr. Mrs. Sivatharshya Pathmanathan", specialty: "Endocrinologist" },
-      { clinic: "Rheumatology Clinic", hospital: "Teaching Hospital – Kalutara", name: "Dr. Sajeewani Dissanayake", specialty: "Rheumatologist" },
-      { clinic: "Rheumatology Clinic", hospital: "Teaching Hospital – Kalutara", name: "Dr. Nuwan Wijayalath", specialty: "Rheumatologist" },
+      { clinic: "Rheumatology Clinic", hospital: "Teaching Hospital - Kalutara", name: "Dr. Sajeewani Dissanayake", specialty: "Rheumatologist" },
+      { clinic: "Rheumatology Clinic", hospital: "Teaching Hospital - Kalutara", name: "Dr. Nuwan Wijayalath", specialty: "Rheumatologist" },
       { clinic: "Rheumatology Clinic", hospital: "Colombo South Teaching Hospital", name: "Dr. Kelum De Silva", specialty: "Rheumatologist" },
       { clinic: "Rheumatology Clinic", hospital: "National Hospital Colombo", name: "Dr. Indika Gurusinghe", specialty: "Rheumatologist" },
       { clinic: "Rheumatology Clinic", hospital: "National Hospital Colombo", name: "Dr. Monika De Silva", specialty: "Rheumatologist" },
       { clinic: "Rheumatology Clinic", hospital: "National Hospital Colombo", name: "Dr. Usha Gowri", specialty: "Rheumatologist" },
       { clinic: "Rheumatology Clinic", hospital: "National Hospital Colombo", name: "Dr. Gunendrika Kasthuriratne", specialty: "Rheumatologist" },
-      { clinic: "Gastroenterology Clinic", hospital: "Teaching Hospital – Kalutara", name: "Dr. Vithiya Rishikesavan", specialty: "Gastroenterologist" },
+      { clinic: "Gastroenterology Clinic", hospital: "Teaching Hospital - Kalutara", name: "Dr. Vithiya Rishikesavan", specialty: "Gastroenterologist" },
       { clinic: "Gastroenterology Clinic", hospital: "Colombo South Teaching Hospital", name: "Dr. Amal Priyantha", specialty: "G.E. Surgeon" },
       { clinic: "Gastroenterology Clinic", hospital: "Colombo South Teaching Hospital", name: "Dr. Sanjeewa Ariyasingha", specialty: "Gastroenterologist" },
-      { clinic: "Orthopaedic Clinic", hospital: "Teaching Hospital – Kalutara", name: "Dr. S.C. Kaluthotage", specialty: "Orthopaedic Surgeon" },
-      { clinic: "Orthopaedic Clinic", hospital: "Teaching Hospital – Kalutara", name: "Dr. Chathuranga Amaraweera", specialty: "Orthopaedic Surgeon" },
+      { clinic: "Orthopaedic Clinic", hospital: "Teaching Hospital - Kalutara", name: "Dr. S.C. Kaluthotage", specialty: "Orthopaedic Surgeon" },
+      { clinic: "Orthopaedic Clinic", hospital: "Teaching Hospital - Kalutara", name: "Dr. Chathuranga Amaraweera", specialty: "Orthopaedic Surgeon" },
       { clinic: "Orthopaedic Clinic", hospital: "Colombo South Teaching Hospital", name: "Dr. R.D.G.M.C. Almeda", specialty: "Orthopaedic Surgeon" },
       { clinic: "Gynecology Clinic", hospital: "Kethumathi Maternity Hospital", name: "Dr. Hiranthi Solangaarachchi", specialty: "Gynaecologist" },
       { clinic: "Gynecology Clinic", hospital: "Kethumathi Maternity Hospital", name: "Dr. K. Jayasri", specialty: "Gynaecologist" },
@@ -755,7 +765,7 @@
     ];
 
     const state = {
-      consultants: [...PRELOADED_CONSULTANTS],
+      consultants: PRELOADED_CONSULTANTS.map(item => ({ ...item })),
       selectedClinic: 'ALL',
       selectedHospital: 'ALL',
       searchQuery: '',
@@ -766,9 +776,20 @@
       dailyDateKey: '',
     };
 
-    // Light-palette hospital accent styles (zero dark surfaces)
+    // Safely escape HTML strings to prevent XSS and syntax issues
+    function escapeHtml(str) {
+      if (str === null || str === undefined) return '';
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+    }
+
+    // Bright light-mode hospital styling tokens (zero dark backgrounds)
     function getHospitalStyle(hospitalName) {
-      const normalized = (hospitalName || '').toLowerCase();
+      const normalized = String(hospitalName || '').toLowerCase();
       if (normalized.includes('panadura')) {
         return {
           badgeBg: 'bg-teal-50',
@@ -847,55 +868,55 @@
       };
     }
 
-    // Deterministic subtle tone variation for doctor clip-art portraits
+    // Round doctor clip-art SVG portrait (no emojis or initials fallback)
     function getDoctorClipArtSvg(name, hospitalName, seedIndex = 0) {
       const style = getHospitalStyle(hospitalName);
-      const safeName = String(name || '');
-      let hash = seedIndex * 17;
+      const safeName = String(name || 'Doctor');
+      let hash = (Number(seedIndex) || 0) * 17 + 7;
       for (let i = 0; i < safeName.length; i++) {
         hash = (hash * 31 + safeName.charCodeAt(i)) % 997;
       }
 
       const skinTones = ['#fde2cf', '#f7cba8', '#eab68c', '#d89f72'];
       const skinHex = skinTones[hash % skinTones.length];
-      const isFemaleStyle = /\b(Mrs\.?|Ms\.?|Woman)\b/i.test(safeName) ||
+      const isFemaleStyle =
+        /\b(Mrs\.?|Ms\.?|Woman)\b/i.test(safeName) ||
         /(surangi|kamani|sajeewani|vithiya|hiranthi|lakmini|usha|gunendrika|monika|malkanthi|menaka|himali|nilushka|sivatharshya|apsara|manel|nilmini|champika|amitha)/i.test(safeName);
+
+      const gradId = `drClipGrad_${hash}_${seedIndex}`;
 
       return `
         <svg viewBox="0 0 64 64" class="w-full h-full block" role="img" aria-label="${escapeHtml(safeName)} doctor clip art">
           <defs>
-            <linearGradient id="drBg_${hash}" x1="0" y1="0" x2="1" y2="1">
+            <linearGradient id="${gradId}" x1="0" y1="0" x2="1" y2="1">
               <stop offset="0%" stop-color="#ffffff" />
               <stop offset="100%" stop-color="${style.accentHex}" stop-opacity="0.16" />
             </linearGradient>
           </defs>
-          <circle cx="32" cy="32" r="32" fill="url(#drBg_${hash})" />
+          <circle cx="32" cy="32" r="32" fill="url(#${gradId})" />
           ${
             isFemaleStyle
               ? `<path d="M17 31c0-9 6.5-15.5 15-15.5S47 22 47 31v10c0 2-1.5 3.5-3.5 3.5h-23C18.5 44.5 17 43 17 41V31z" fill="${style.hairHex}" />`
               : `<path d="M20 26c0-7.5 5.4-12.5 12-12.5s12 5 12 12.5v2.5H20V26z" fill="${style.hairHex}" />`
           }
-          <!-- White Medical Coat & Collar -->
           <path d="M14 58c1.5-9.5 7.5-14.5 18-14.5s16.5 5 18 14.5H14z" fill="${style.coatFill}" stroke="${style.coatStroke}" stroke-width="2" stroke-linejoin="round" />
           <path d="M26 43.5l6 7.5 6-7.5" fill="none" stroke="${style.coatStroke}" stroke-width="1.8" stroke-linejoin="round" />
-          <!-- Neck -->
           <rect x="28" y="36" width="8" height="8" rx="3.5" fill="${skinHex}" />
-          <!-- Head -->
           <circle cx="32" cy="27.5" r="10.2" fill="${skinHex}" stroke="${style.coatStroke}" stroke-width="1.4" />
-          <!-- Eyes & Gentle Smile -->
           <circle cx="28.3" cy="27" r="1.35" fill="#0f172a" />
           <circle cx="35.7" cy="27" r="1.35" fill="#0f172a" />
           <path d="M29.3 31.8c1.5 1.4 3.9 1.4 5.4 0" fill="none" stroke="#0f172a" stroke-width="1.5" stroke-linecap="round" />
-          <!-- Stethoscope Around Neck & Chest -->
           <path d="M23 44.5c0 5.8 3.6 9.5 9 9.5s9-3.7 9-9.5" fill="none" stroke="${style.accentHex}" stroke-width="2.2" stroke-linecap="round" />
           <circle cx="32" cy="54" r="2.7" fill="${style.accentHex}" stroke="#ffffff" stroke-width="1.2" />
         </svg>
       `;
     }
 
-    // Parse CSV from Google Sheets GViz endpoint
+    // RFC-4180 compliant CSV parser with quoted field and newline support
     function parseCSV(text) {
       const rows = [];
+      if (!text || typeof text !== 'string') return rows;
+
       let currentRow = [];
       let currentVal = '';
       let insideQuotes = false;
@@ -920,10 +941,16 @@
           rows.push(currentRow);
           currentRow = [];
           currentVal = '';
+        } else if (char === '\r' && !insideQuotes) {
+          currentRow.push(currentVal.trim());
+          rows.push(currentRow);
+          currentRow = [];
+          currentVal = '';
         } else {
           currentVal += char;
         }
       }
+
       if (currentVal.length > 0 || currentRow.length > 0) {
         currentRow.push(currentVal.trim());
         rows.push(currentRow);
@@ -931,6 +958,78 @@
       return rows;
     }
 
+    // Extract hospital names specifically from column B across rows B8:B72 when available
+    function extractHospitalNamesFromB8ToB72(b8ToB72Rows, fullSheetRows) {
+      const collected = [];
+      const seenLower = new Set();
+
+      const addHospitalCandidate = (raw) => {
+        const cleaned = String(raw || '').replace(/\s+/g, ' ').trim();
+        if (!cleaned || cleaned.length < 3) return;
+        const lower = cleaned.toLowerCase();
+        if (
+          lower === 'hospital' ||
+          lower === 'hospitals' ||
+          lower === 'institution' ||
+          lower === 'current hospital' ||
+          /^row\s*\d+$/i.test(cleaned)
+        ) {
+          return;
+        }
+        if (!seenLower.has(lower)) {
+          seenLower.add(lower);
+          collected.push(cleaned);
+        }
+      };
+
+      // Primary path: rows returned from gviz range=B8:B72 (up to 65 rows: rows 8..72)
+      if (Array.isArray(b8ToB72Rows) && b8ToB72Rows.length > 0) {
+        b8ToB72Rows.slice(0, 65).forEach(row => {
+          if (Array.isArray(row) && row.length > 0) {
+            addHospitalCandidate(row[0]);
+          }
+        });
+      }
+
+      // Secondary path: if range query returned fewer or combined columns, inspect column B (index 1) for rows 8..72 (0-based indices 7..71)
+      if (collected.length === 0 && Array.isArray(fullSheetRows) && fullSheetRows.length >= 8) {
+        const startIdx = 7; // Row 8 (1-indexed) -> index 7 (0-indexed)
+        const endIdx = Math.min(fullSheetRows.length - 1, 71); // Row 72 (1-indexed) -> index 71 (0-indexed)
+        for (let r = startIdx; r <= endIdx; r++) {
+          const row = fullSheetRows[r];
+          if (Array.isArray(row) && row.length > 1) {
+            addHospitalCandidate(row[1]);
+          }
+        }
+      }
+
+      return collected;
+    }
+
+    // Fetch CSV text safely with timeout and no-store
+    async function fetchCsvSafely(url, timeoutMs = 9000) {
+      const controller = typeof AbortController !== 'undefined' ? new AbortController() : null;
+      const timer = controller ? setTimeout(() => controller.abort(), timeoutMs) : null;
+      try {
+        const res = await fetch(url, {
+          cache: 'no-store',
+          signal: controller ? controller.signal : undefined,
+        });
+        if (!res || !res.ok) return '';
+        const text = await res.text();
+        // Guard against HTML login/error pages returned instead of CSV
+        if (/^\s*<!doctype html/i.test(text) || /^\s*<html/i.test(text)) {
+          return '';
+        }
+        return text;
+      } catch (_) {
+        return '';
+      } finally {
+        if (timer) clearTimeout(timer);
+      }
+    }
+
+    // Synchronize live data from Google Sheet ID 1QddUsl1_hKiMFrtRw3wvDm5fcAFRyT3jiOPpDisGBWs with safe fallback
     async function syncWithGoogleSheet(isManual = false) {
       const syncDot = document.getElementById('syncStatusDot');
       const syncText = document.getElementById('syncStatusText');
@@ -942,14 +1041,17 @@
       if (refreshIcon) refreshIcon.classList.add('animate-spin');
 
       try {
-        const response = await fetch(GVIZ_CSV_URL, { cache: 'no-store' });
-        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        const [fullCsvText, rangeCsvText] = await Promise.all([
+          fetchCsvSafely(GVIZ_FULL_CSV_URL),
+          fetchCsvSafely(GVIZ_COL_B_RANGE_URL),
+        ]);
 
-        const csvText = await response.text();
-        const parsedRows = parseCSV(csvText);
+        const parsedRows = parseCSV(fullCsvText);
+        const rangeRows = parseCSV(rangeCsvText);
+        const extractedHospitals = extractHospitalNamesFromB8ToB72(rangeRows, parsedRows);
 
         if (parsedRows.length > 1) {
-          const header = parsedRows[0].map(h => h.toLowerCase());
+          const header = parsedRows[0].map(h => String(h || '').toLowerCase());
           let clinicIdx = header.findIndex(h => h.includes('clinic') || h.includes('department'));
           let hospitalIdx = header.findIndex(h => h.includes('hospital') || h.includes('institution'));
           let nameIdx = header.findIndex(h => h.includes('consultant') || h.includes('doctor') || h.includes('name'));
@@ -963,16 +1065,25 @@
           const liveData = [];
           for (let i = 1; i < parsedRows.length; i++) {
             const row = parsedRows[i];
-            if (!row || row.length < 3) continue;
-            const clinic = (row[clinicIdx] || '').trim();
-            const hospital = (row[hospitalIdx] || '').trim();
-            const name = (row[nameIdx] || '').trim();
-            const specialty = (row[specIdx] || '').trim();
+            if (!Array.isArray(row) || row.length < 2) continue;
+
+            const clinic = String(row[clinicIdx] || '').trim();
+            const rawHosp = String(row[hospitalIdx] || '').trim();
+            const name = String(row[nameIdx] || '').trim();
+            const specialty = String(row[specIdx] || '').trim();
+
+            // Prefer B8:B72 hospital name if present for corresponding sheet row (rows 8..72 -> row indices 7..71)
+            let resolvedHospital = rawHosp;
+            if (i >= 7 && i <= 71 && Array.isArray(parsedRows[i]) && String(parsedRows[i][1] || '').trim()) {
+              resolvedHospital = String(parsedRows[i][1]).trim();
+            } else if (!resolvedHospital && extractedHospitals.length > 0) {
+              resolvedHospital = extractedHospitals[(i - 1) % extractedHospitals.length];
+            }
 
             if (clinic && name) {
               liveData.push({
                 clinic,
-                hospital: hospital || 'Regional Hospital',
+                hospital: resolvedHospital || 'Base Hospital Panadura',
                 name,
                 specialty: specialty || 'Specialist Consultant',
               });
@@ -984,21 +1095,45 @@
             renderAll();
             const nowStr = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
             if (syncDot) syncDot.className = 'w-2 h-2 rounded-full bg-emerald-500';
-            if (syncText) syncText.textContent = 'Live Synced with Google Sheet';
-            if (lastSyncedEl) lastSyncedEl.textContent = `Last synced at ${nowStr} (${liveData.length} records)`;
+            if (syncText) syncText.textContent = 'Live Synced (B8:B72)';
+            if (lastSyncedEl) {
+              lastSyncedEl.textContent = `Last synced at ${nowStr} (${liveData.length} records)`;
+            }
             if (isManual) {
               showToast(`Synced ${liveData.length} consultants from Google Sheet`);
             }
             return;
           }
         }
-        throw new Error('Empty or invalid sheet structure');
+
+        // If full rows weren't returned but B8:B72 hospital names were extracted, map them cleanly onto the preloaded roster
+        if (extractedHospitals.length > 0) {
+          state.consultants = PRELOADED_CONSULTANTS.map((doc, idx) => ({
+            ...doc,
+            hospital: extractedHospitals[idx % extractedHospitals.length] || doc.hospital,
+          }));
+          renderAll();
+          const nowStr = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+          if (syncDot) syncDot.className = 'w-2 h-2 rounded-full bg-emerald-500';
+          if (syncText) syncText.textContent = 'Hospitals Synced (B8:B72)';
+          if (lastSyncedEl) {
+            lastSyncedEl.textContent = `Hospitals updated from B8:B72 at ${nowStr}`;
+          }
+          if (isManual) {
+            showToast(`Updated ${extractedHospitals.length} hospital names from B8:B72`);
+          }
+          return;
+        }
+
+        throw new Error('Using preloaded fallback roster');
       } catch (_) {
         if (syncDot) syncDot.className = 'w-2 h-2 rounded-full bg-teal-500';
-        if (syncText) syncText.textContent = 'Roster Active (Cached)';
-        if (lastSyncedEl) lastSyncedEl.textContent = `Preloaded Roster (${state.consultants.length} records)`;
+        if (syncText) syncText.textContent = 'Roster Active (Preloaded)';
+        if (lastSyncedEl) {
+          lastSyncedEl.textContent = `Preloaded Roster (${state.consultants.length} records)`;
+        }
         if (isManual) {
-          showToast('Using verified preloaded roster');
+          showToast('Using verified 62-consultant preloaded roster');
         }
       } finally {
         if (refreshIcon) refreshIcon.classList.remove('animate-spin');
@@ -1010,15 +1145,15 @@
       const toast = document.getElementById('toastNotification');
       const toastMsg = document.getElementById('toastMessage');
       if (!toast || !toastMsg) return;
-      toastMsg.textContent = message;
+      toastMsg.textContent = String(message || '');
       toast.classList.remove('opacity-0', 'translate-y-3', 'pointer-events-none');
-      clearTimeout(toastTimer);
+      if (toastTimer) clearTimeout(toastTimer);
       toastTimer = setTimeout(() => {
         toast.classList.add('opacity-0', 'translate-y-3', 'pointer-events-none');
       }, 3200);
     }
 
-    // Get today's local date key (YYYY-MM-DD) so daily counts scope cleanly per day
+    // Daily per-day view tracking helpers in localStorage
     function getTodayDateKey() {
       const now = new Date();
       const y = now.getFullYear();
@@ -1028,6 +1163,7 @@
     }
 
     function getConsultantViewKey(doc) {
+      if (!doc) return '';
       return `${String(doc.name || '').trim().toLowerCase()}|${String(doc.hospital || '').trim().toLowerCase()}|${String(doc.clinic || '').trim().toLowerCase()}`;
     }
 
@@ -1036,7 +1172,7 @@
       state.dailyDateKey = todayKey;
       const storageKey = `consultant_daily_views_${todayKey}`;
       try {
-        const raw = window.localStorage.getItem(storageKey);
+        const raw = window.localStorage ? window.localStorage.getItem(storageKey) : null;
         const parsed = raw ? JSON.parse(raw) : {};
         state.dailyViews = parsed && typeof parsed === 'object' ? parsed : {};
       } catch (_) {
@@ -1052,9 +1188,11 @@
       }
       const storageKey = `consultant_daily_views_${todayKey}`;
       try {
-        window.localStorage.setItem(storageKey, JSON.stringify(state.dailyViews));
+        if (window.localStorage) {
+          window.localStorage.setItem(storageKey, JSON.stringify(state.dailyViews));
+        }
       } catch (_) {
-        // Ignore storage errors
+        // Ignore storage quota or privacy-mode errors
       }
     }
 
@@ -1074,7 +1212,7 @@
         loadDailyViews();
       }
       const key = getConsultantViewKey(doc);
-      state.dailyViews[key] = Number(state.dailyViews[key] || 0) + amount;
+      state.dailyViews[key] = Number(state.dailyViews[key] || 0) + (Number(amount) || 1);
       saveDailyViews();
       if (shouldRender) {
         renderMostViewedTodaySection();
@@ -1184,8 +1322,8 @@
               <p class="font-display text-xs sm:text-sm font-extrabold text-slate-900 truncate mt-0.5">
                 ${escapeHtml(doc.name)}
               </p>
-              <p class="text-[11px] text-slate-600 truncate">
-                ${escapeHtml(doc.clinic)} &bull; ${escapeHtml(doc.hospital)}
+              <p class="text-[11px] font-semibold text-teal-800 truncate">
+                ${escapeHtml(doc.hospital)}
               </p>
             </div>
           </div>
@@ -1209,13 +1347,14 @@
       });
     }
 
+    // Horizontal row of clickable hospital filter buttons with live consultant counts
     function renderHospitalButtons() {
       const container = document.getElementById('hospitalFilterBar');
       if (!container) return;
 
       const preferredOrder = [
         'Base Hospital Panadura',
-        'Teaching Hospital – Kalutara',
+        'Teaching Hospital - Kalutara',
         'Colombo South Teaching Hospital',
         'National Hospital Colombo',
         'Kethumathi Maternity Hospital',
@@ -1223,7 +1362,10 @@
 
       const hospitalCounts = new Map();
       state.consultants.forEach(c => {
-        hospitalCounts.set(c.hospital, (hospitalCounts.get(c.hospital) || 0) + 1);
+        const hosp = String(c.hospital || '').trim();
+        if (hosp) {
+          hospitalCounts.set(hosp, (hospitalCounts.get(hosp) || 0) + 1);
+        }
       });
 
       const uniqueHospitals = Array.from(hospitalCounts.keys());
@@ -1254,8 +1396,8 @@
           : 'shrink-0 inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold bg-white text-slate-700 border border-slate-200 hover:text-teal-800 hover:border-teal-300 hover:bg-teal-50/50 transition-all cursor-pointer';
 
         const countBadgeClass = isActive
-          ? 'px-1.5 py-0.2 rounded-full text-[10px] font-extrabold bg-white/25 text-white'
-          : 'px-1.5 py-0.2 rounded-full text-[10px] font-bold bg-slate-100 text-slate-600';
+          ? 'px-1.5 py-0.5 rounded-full text-[10px] font-extrabold bg-white/25 text-white'
+          : 'px-1.5 py-0.5 rounded-full text-[10px] font-bold bg-slate-100 text-slate-600';
 
         btn.innerHTML = `
           <span>${escapeHtml(item.label)}</span>
@@ -1293,9 +1435,9 @@
       const allClinics = Array.from(clinicMap.entries()).map(([name, count]) => ({ name, count }));
       if (countBadge) countBadge.textContent = allClinics.length;
 
-      const filterText = state.clinicSidebarFilter.toLowerCase().trim();
+      const filterText = String(state.clinicSidebarFilter || '').toLowerCase().trim();
       const filteredClinics = filterText
-        ? allClinics.filter(c => c.name.toLowerCase().includes(filterText))
+        ? allClinics.filter(c => String(c.name || '').toLowerCase().includes(filterText))
         : allClinics;
 
       container.innerHTML = '';
@@ -1373,7 +1515,7 @@
       return (
         state.selectedClinic !== 'ALL' ||
         state.selectedHospital !== 'ALL' ||
-        state.searchQuery.trim() !== ''
+        String(state.searchQuery || '').trim() !== ''
       );
     }
 
@@ -1430,7 +1572,7 @@
     }
 
     function getFilteredConsultants() {
-      const q = state.searchQuery.toLowerCase().trim();
+      const q = String(state.searchQuery || '').toLowerCase().trim();
       const matched = state.consultants
         .map((item, originalIndex) => ({ item, originalIndex }))
         .filter(({ item }) => {
@@ -1495,7 +1637,7 @@
       const hasActiveFilters =
         state.selectedClinic !== 'ALL' ||
         state.selectedHospital !== 'ALL' ||
-        state.searchQuery.trim() !== '' ||
+        String(state.searchQuery || '').trim() !== '' ||
         state.showAllOnFrontScreen ||
         state.sortByMostViewedDaily;
       const resetBtn = document.getElementById('resetAllFiltersBtn');
@@ -1534,7 +1676,7 @@
 
         card.innerHTML = `
           <div>
-            <div class="flex flex-wrap items-center justify-between gap-2 mb-4">
+            <div class="flex flex-wrap items-center justify-between gap-2 mb-3.5">
               <div class="flex flex-wrap items-center gap-1.5">
                 <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-[11px] font-semibold bg-teal-50 text-teal-800 border border-teal-200/80">
                   <i data-lucide="stethoscope" class="w-3 h-3 text-teal-600"></i>
@@ -1550,17 +1692,13 @@
                 }
               </div>
 
-              <button
-                type="button"
-                data-hospital-jump="${escapeHtml(doc.hospital)}"
-                title="Filter by ${escapeHtml(doc.hospital)}"
-                class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-semibold ${style.badgeBg} ${style.badgeText} border ${style.badgeBorder} hover:brightness-95 transition cursor-pointer"
-              >
-                <span class="w-1.5 h-1.5 rounded-full ${style.dot}"></span>
-                ${escapeHtml(doc.hospital)}
-              </button>
+              <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[11px] font-bold bg-slate-50 text-teal-800 border border-teal-200/70">
+                <i data-lucide="eye" class="w-3 h-3 text-teal-600"></i>
+                ${dailyViews}
+              </span>
             </div>
 
+            <!-- Round Doctor Clip-Art Portrait + Name & Specialty -->
             <div class="flex items-start gap-3.5">
               <div class="relative avatar-ring w-12 h-12 rounded-full bg-gradient-to-br ${style.avatarGrad} border flex items-center justify-center shrink-0 overflow-hidden">
                 ${getDoctorClipArtSvg(doc.name, doc.hospital, idx)}
@@ -1575,18 +1713,35 @@
                 </p>
               </div>
             </div>
+
+            <!-- Prominent Highlighted "Current Hospital" Badge -->
+            <div class="mt-3.5 current-hospital-highlight rounded-xl px-3 py-2 flex items-center justify-between gap-2">
+              <div class="min-w-0">
+                <span class="block text-[10px] font-extrabold uppercase tracking-wider text-teal-700">
+                  Current Hospital
+                </span>
+                <button
+                  type="button"
+                  data-hospital-jump="${escapeHtml(doc.hospital)}"
+                  title="Filter by ${escapeHtml(doc.hospital)}"
+                  class="mt-0.5 inline-flex items-center gap-1.5 text-xs sm:text-[13px] font-extrabold ${style.badgeText} hover:underline text-left cursor-pointer"
+                >
+                  <span class="w-2 h-2 rounded-full ${style.dot} shrink-0"></span>
+                  <span class="truncate">${escapeHtml(doc.hospital)}</span>
+                </button>
+              </div>
+              <i data-lucide="building-2" class="w-4 h-4 text-teal-600 shrink-0"></i>
+            </div>
           </div>
 
           <div class="pt-3 border-t border-slate-200/80 flex items-center justify-between text-[11px] text-slate-500">
-            <span class="inline-flex items-center gap-1.5 truncate">
-              <i data-lucide="eye" class="w-3 h-3 text-teal-600 shrink-0"></i>
-              <span class="font-semibold text-teal-800">${dailyViews}</span>
-              <span class="truncate">${escapeHtml(doc.hospital)}</span>
+            <span class="truncate font-medium text-slate-600">
+              ${escapeHtml(doc.clinic)}
             </span>
             <button
               type="button"
               data-clinic-jump="${escapeHtml(doc.clinic)}"
-              class="shrink-0 ml-2 text-teal-700 hover:text-teal-900 font-semibold inline-flex items-center gap-1 transition cursor-pointer"
+              class="shrink-0 ml-2 text-teal-700 hover:text-teal-900 font-bold inline-flex items-center gap-1 transition cursor-pointer"
               title="Filter by ${escapeHtml(doc.clinic)}"
             >
               <span>Unit</span>
@@ -1596,7 +1751,7 @@
         `;
 
         card.addEventListener('click', (e) => {
-          if (e.target.closest('button')) return;
+          if (e.target && typeof e.target.closest === 'function' && e.target.closest('button')) return;
           recordConsultantDailyView(doc, 1, true);
         });
 
@@ -1643,16 +1798,6 @@
       renderConsultantCards();
     }
 
-    function escapeHtml(str) {
-      if (str === null || str === undefined) return '';
-      return String(str)
-        .replace(/&/g, '&amp;')
-        .replace(/</g, '&lt;')
-        .replace(/>/g, '&gt;')
-        .replace(/"/g, '&quot;')
-        .replace(/'/g, '&#039;');
-    }
-
     function closeMobileSidebarIfOpen() {
       if (window.innerWidth < 1024) {
         const sidebar = document.getElementById('clinicSidebar');
@@ -1661,9 +1806,13 @@
     }
 
     document.addEventListener('DOMContentLoaded', () => {
-      seedInitialDailyBaselineIfEmpty();
-      renderAll();
-      syncWithGoogleSheet(false);
+      try {
+        seedInitialDailyBaselineIfEmpty();
+        renderAll();
+        syncWithGoogleSheet(false);
+      } catch (_) {
+        // Ensure UI never crashes on initial load
+      }
 
       const searchForm = document.getElementById('searchForm');
       const searchInput = document.getElementById('mainSearchInput');
